@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Five websites, built by Claude Opus 5</title>
+<meta name="description" content="Five fictional brand websites designed and built end to end by Claude Opus 5, including two with 3D scroll sequences.">
+<meta name="theme-color" content="#101214">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#101214; --bg-2:#181B1E; --ink:#EDEFF0; --soft:#9AA3A8; --line:rgba(237,239,240,.14);
+  --display:"Instrument Serif",Georgia,serif; --text:"Geist",system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#EEF0F1;--bg-2:#FFFFFF;--ink:#14171A;--soft:#565E63;--line:rgba(20,23,26,.14)}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1;letter-spacing:-.015em}
+p{margin:0;text-wrap:pretty}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1200px,100% - clamp(32px,6vw,80px));margin-inline:auto}
+header{padding:clamp(80px,12vh,150px) 0 clamp(40px,6vw,72px)}
+.kick{font-family:var(--mono);font-size:13px;color:var(--soft)}
+h1{font-size:clamp(46px,7vw,110px);margin-top:20px;max-width:14ch}
+header p{margin-top:24px;color:var(--soft);font-size:19px;max-width:52ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding-bottom:clamp(64px,10vw,120px)}
+.card{display:flex;flex-direction:column;gap:10px;padding:26px;border-radius:22px;background:var(--bg-2);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;
+  transition-property:transform,box-shadow;transition-duration:220ms;transition-timing-function:var(--ease-out)}
+.card:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--line),0 24px 48px -24px rgba(0,0,0,.55)}
+.card:active{transform:translateY(0) scale(.99)}
+.card .n{font-family:var(--mono);font-size:13px;color:var(--soft)}
+.card h2{font-size:34px}
+.card .d{color:var(--soft);font-size:16px;flex:1}
+.card .tag{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.card .tag span{font-size:13px;padding:4px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);color:var(--soft)}
+.sw{display:flex;gap:4px;margin-bottom:4px}
+.sw i{width:26px;height:26px;border-radius:8px}
+footer{padding:0 0 60px;color:var(--soft);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:24px;box-shadow:0 -1px 0 var(--line)}
+@media (prefers-reduced-motion: reduce){*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kick">Five websites, one model</p>
+  <h1>Designed and built by Claude Opus 5.</h1>
+  <p>Five fictional companies, each with its own brand, copy, layout and interaction design. The last two build their products in 3D in the browser. Every page is a single HTML file.</p>
+</div></header>
+
+<main><div class="wrap grid">
+  <a class="card" href="morrow-salt-works/index.html">
+    <div class="sw" aria-hidden="true"><i style="background:#2D5B6B"></i><i style="background:#9A4A2E"></i><i style="background:#EEF1EF"></i></div>
+    <span class="n">01</span><h2>Morrow Salt Works</h2>
+    <p class="d">Sea salt harvested at low tide. The hero is cut into layers, and scrolling floods and drains the salt pans over 24 hours of real tide.</p>
+    <div class="tag"><span>Layered hero</span><span>Live tide</span><span>Shop</span></div>
+  </a>
+  <a class="card" href="nightjar-sleeper/index.html">
+    <div class="sw" aria-hidden="true"><i style="background:#12163A"></i><i style="background:#F4A93B"></i><i style="background:#ECEAF6"></i></div>
+    <span class="n">02</span><h2>Nightjar Sleeper Co.</h2>
+    <p class="d">European night trains. A split-flap departures board, and a train window drawn in code that carries you through the night, stopping at every station.</p>
+    <div class="tag"><span>Canvas window</span><span>Live timetable</span><span>Booking</span></div>
+  </a>
+  <a class="card" href="overprint/index.html">
+    <div class="sw" aria-hidden="true"><i style="background:#FF48B0"></i><i style="background:#0078BF"></i><i style="background:#F6F5F1"></i></div>
+    <span class="n">03</span><h2>Overprint</h2>
+    <p class="d">A risograph studio. Pick any two of twelve inks and the whole site reprints, photos included. A poster prints one pass at a time as you scroll.</p>
+    <div class="tag"><span>Live re-inking</span><span>Print run</span><span>Quote tool</span></div>
+  </a>
+  <a class="card" href="verre-50-12/index.html">
+    <div class="sw" aria-hidden="true"><i style="background:#1B1D20"></i><i style="background:#CDD1D3"></i><i style="background:#2F6B5E"></i></div>
+    <span class="n">04</span><h2>Verre 50/1.2</h2>
+    <p class="d">A camera lens modelled in 3D. It opens, separates into ten glass elements, and traces light through them to a single point on the sensor.</p>
+    <div class="tag"><span>3D scroll</span><span>WebGL</span><span>Aperture demo</span></div>
+  </a>
+  <a class="card" href="fieldnote-k65/index.html">
+    <div class="sw" aria-hidden="true"><i style="background:#8C977A"></i><i style="background:#EEE8D8"></i><i style="background:#D9542A"></i></div>
+    <span class="n">05</span><h2>Fieldnote K65</h2>
+    <p class="d">A keyboard in 3D you can actually type on. It comes apart into seven layers as you read, and repaints in three colourways.</p>
+    <div class="tag"><span>3D scroll</span><span>Type on it</span><span>Web Audio</span></div>
+  </a>
+</div></main>
+
+<footer><div class="wrap">
+  <span>All five companies are fictional, made for a design showcase.</span>
+  <span>Built with Claude Opus 5</span>
+</div></footer>
+</body>
+</html>

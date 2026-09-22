@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightjar Sleeper Co. | Night trains across Europe</title>
+<meta name="description" content="Four night trains across Europe. Board after dinner, wake up in another city. Berths, private cabins and suites from €79.">
+<meta name="theme-color" content="#12163A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#12163A; --night-2:#191E4A; --night-3:#232A5E; --ink-n:#ECEAF6; --soft-n:#A5A8C8; --line-n:rgba(236,234,246,.12);
+  --sodium:#F4A93B; --sodium-ink:#1A1206;
+  --day:#E7EDF1; --day-2:#F4F7F9; --ink-d:#151934; --soft-d:#525874; --line-d:rgba(21,25,52,.12);
+  --display:"Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --text:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1); --ease-drawer:cubic-bezier(.32,.72,0,1); --ease-ui:cubic-bezier(.2,0,0,1);
+  --e3:0 4px 8px rgba(5,7,25,.2),0 32px 64px -12px rgba(5,7,25,.55);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --day:#1D2542; --day-2:#242D4E; --ink-d:#E9ECF4; --soft-d:#A3AAC4; --line-d:rgba(233,236,244,.12); }
+}
+:root[data-theme="dark"]{ --day:#1D2542; --day-2:#242D4E; --ink-d:#E9ECF4; --soft-d:#A3AAC4; --line-d:rgba(233,236,244,.12); }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--night);color:var(--ink-n);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+::selection{background:#F4A93B;color:#1A1206}
+a{text-underline-position:from-font;text-decoration-thickness:from-font;text-underline-offset:3px}
+.hero .rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.mask-line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.mask-line>span{display:block;transform:translateY(108%);transition:transform 1000ms var(--ease-out)}
+.intro.in .mask-line>span{transform:none}
+.intro .mask-line:nth-child(2)>span{transition-delay:100ms}
+.intro .mask-line:nth-child(3)>span{transition-delay:200ms}
+.intro .copy{opacity:0;transform:translateY(12px);transition:opacity 900ms var(--ease-out) 300ms,transform 900ms var(--ease-out) 300ms}
+.intro.in .copy{opacity:1;transform:none}
+.menu{will-change:transform;transition:transform 700ms var(--ease-out)}
+.menu.live{transition:none}
+.field-err{display:block;min-height:0;margin-top:6px;font-size:14px;color:#B53D27}
+.field-err:empty{display:none}
+.jmeta b{color:var(--sodium);font-weight:600}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sodium);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;text-wrap:balance;text-transform:none;letter-spacing:-.005em;line-height:.92}
+p{margin:0;text-wrap:pretty}
+.wrap{width:min(1280px,100% - clamp(40px,6vw,96px));margin-inline:auto}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+.skip{position:absolute;left:-999px;top:8px;background:var(--sodium);color:var(--sodium-ink);padding:8px 12px;z-index:200;border-radius:8px}
+.skip:focus{left:8px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border:0;border-radius:12px;background:var(--sodium);color:var(--sodium-ink);font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px -8px rgba(244,169,59,.6);
+  transition-property:transform,background-color;transition-duration:160ms;transition-timing-function:var(--ease-out)}
+.btn:hover{background:#F7B955}
+.btn:active{transform:scale(.96)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn.ghost:hover{background:rgba(255,255,255,.07)}
+@media (hover:none){.btn:hover{background:var(--sodium)}.btn.ghost:hover{background:transparent}}
+
+/* Banner + nav */
+.genbar{background:#0A0D26;color:var(--soft-n);font-size:13px;line-height:1.4}
+.genbar .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 26px;padding:9px 0}
+.genbar b{color:var(--ink-n);font-weight:600}
+.nav{position:sticky;top:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background-color 300ms var(--ease-out),box-shadow 300ms var(--ease-out)}
+.nav.solid{background:rgba(18,22,58,.82);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 1px 0 var(--line-n)}
+.nav.day{background:rgba(231,237,241,.86);color:var(--ink-d);box-shadow:0 1px 0 var(--line-d)}
+.nav .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:.01em}
+.mark svg{width:30px;height:30px}
+.links{display:flex;align-items:center;gap:4px}
+.links a{padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:500;font-size:15px;transition:background-color 150ms var(--ease-ui)}
+.links a:hover{background:rgba(127,127,160,.14)}
+.links a[aria-current="true"]{box-shadow:inset 0 -2px 0 var(--sodium)}
+.links .btn{min-height:44px;padding:0 18px;margin-left:10px;font-size:15px}
+@media (max-width:860px){.links a:not(.btn){display:none}}
+
+/* Image slots */
+.slot{position:relative;overflow:hidden;background:var(--night-3)}
+.slot img{width:100%;height:100%;object-fit:cover}
+.slot:not(.filled)::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 16px,rgba(255,255,255,.05) 16px 17px)}
+.slot:not(.filled)::after{content:attr(data-label);position:absolute;left:16px;bottom:14px;max-width:calc(100% - 32px);padding:6px 10px;border-radius:8px;background:rgba(10,13,38,.7);color:var(--ink-n);font-size:13px;font-weight:600}
+.slot.filled{outline:1px solid oklch(1 0 0 / .1);outline-offset:-1px}
+
+/* HERO */
+.hero{position:relative;padding-bottom:clamp(64px,8vw,120px);margin-top:-68px}
+.hero .photo{position:relative;height:min(88vh,860px);min-height:560px}
+.hero .photo .slot{position:absolute;inset:0;will-change:transform}
+.hero .photo .slot img{object-position:62% 50%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,22,58,.55) 0%,rgba(18,22,58,0) 30%,rgba(18,22,58,0) 55%,var(--night) 100%);pointer-events:none}
+.hero .col{position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,15,42,.78) 0%,rgba(12,15,42,.5) 34%,rgba(12,15,42,0) 62%);pointer-events:none}
+@media (max-width:760px){.hero .col{background:linear-gradient(0deg,rgba(12,15,42,.8) 0%,rgba(12,15,42,.35) 60%,rgba(12,15,42,.1) 100%)}}
+.hero .lede{position:absolute;inset:auto 0 0 0;padding-bottom:clamp(120px,16vh,190px)}
+.hero h1{letter-spacing:-.01em;font-size:clamp(54px,7.8vw,132px);color:var(--ink-n);max-width:none;text-shadow:0 2px 30px rgba(5,7,25,.35)}
+.hero .sub{margin-top:22px;max-width:40ch;font-size:19px;color:#D9DAEA}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.enter{animation:rise 1000ms var(--ease-out) both;animation-delay:calc(var(--i,0)*100ms + 120ms)}
+@keyframes rise{from{opacity:0;transform:translateY(22px);filter:blur(6px)}}
+
+/* Departures board */
+.board{position:relative;z-index:2;margin-top:clamp(-120px,-11vh,-70px);border-radius:24px;padding:10px;background:#07091F;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),var(--e3)}
+.board-in{border-radius:16px;background:#0B0E2A;padding:18px 20px 12px;overflow-x:auto}
+.board-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.board-top h2{font-size:28px;letter-spacing:.02em}
+.board-top .clk{font-family:var(--mono);color:var(--sodium);font-size:18px}
+table.dep{width:100%;border-collapse:separate;border-spacing:0 6px;min-width:760px}
+.dep th{font-size:12px;font-weight:600;color:var(--soft-n);text-align:left;padding:0 8px 4px}
+.dep td{padding:0 8px;vertical-align:middle}
+.dep tr.row{cursor:pointer}
+.dep tr.row td:first-child{border-radius:10px 0 0 10px}
+.dep tr.row td:last-child{border-radius:0 10px 10px 0}
+.dep tr.row td{background:rgba(255,255,255,.025);transition:background-color 150ms var(--ease-ui);height:52px}
+.dep tr.row:hover td{background:rgba(255,255,255,.06)}
+.dep tr.row.sel td{background:rgba(244,169,59,.1)}
+.dep tr.row.sel td:first-child{box-shadow:inset 3px 0 0 var(--sodium)}
+.flap{display:inline-flex;gap:2px;font-family:var(--mono);font-size:17px;line-height:1}
+.flap i{display:inline-grid;place-items:center;width:1.18em;height:1.7em;border-radius:3px;background:linear-gradient(#1A1E46 0 49%,#0E1133 51% 100%);color:#F2EFE2;font-style:normal;box-shadow:inset 0 -1px 0 rgba(0,0,0,.4)}
+.flap i.t{animation:tick 70ms linear}
+@keyframes tick{50%{transform:scaleY(.2);filter:brightness(1.6)}}
+.flap.amber i{color:var(--sodium)}
+.flap.sp i{background:none;box-shadow:none;width:.5em}
+.dep .pick{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:9px;border:0;background:rgba(255,255,255,.07);font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:transform 160ms var(--ease-out),background-color 150ms var(--ease-ui)}
+.dep .pick:active{transform:scale(.96)}
+.dep tr.sel .pick{background:var(--sodium);color:var(--sodium-ink)}
+.board-note{font-size:13px;color:var(--soft-n);padding:8px 8px 4px}
+
+/* Intro */
+.intro{padding:clamp(80px,10vw,150px) 0 clamp(60px,8vw,110px)}
+.intro .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,96px);align-items:end}
+.intro h2{font-size:clamp(46px,6vw,96px)}
+.intro p{color:var(--soft-n);font-size:18px;max-width:44ch}
+.intro p + p{margin-top:16px}
+@media (max-width:860px){.intro .wrap{grid-template-columns:1fr}}
+
+/* PEAK: the window */
+.journey{position:relative;height:560vh}
+.journey .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;background:var(--jbg,#1B1F4E);transition:none}
+.journey .grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+.lnlab{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--soft-n);margin-top:4px}
+.carriage{position:relative;padding:clamp(18px,2.4vw,34px);border-radius:40px;background:#2B2238;box-shadow:inset 0 2px 0 rgba(255,255,255,.06),inset 0 -8px 24px rgba(0,0,0,.35),var(--e3)}
+.carriage::after{content:"";position:absolute;left:50%;bottom:10px;width:56px;height:6px;margin-left:-28px;border-radius:4px;background:#C9A15A;box-shadow:0 1px 0 rgba(0,0,0,.4)}
+.window{position:relative;aspect-ratio:16/10;border-radius:28px;overflow:hidden;background:#0B0E2A;box-shadow:inset 0 0 0 6px #1A1424,inset 0 0 0 7px rgba(255,255,255,.08)}
+.window canvas{display:block;width:100%;height:100%}
+.window .glass{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 70%,rgba(255,255,255,.05) 100%);box-shadow:inset 0 0 0 6px #1A1424,inset 0 0 40px rgba(0,0,0,.45)}
+.info .route-name{font-family:var(--mono);font-size:14px;color:var(--sodium)}
+.info h2{font-size:clamp(40px,4.6vw,74px);margin-top:8px}
+.jclock{font-family:var(--display);font-weight:600;font-size:clamp(72px,8vw,128px);line-height:.85;margin-top:22px;letter-spacing:.01em}
+.jmeta{font-size:15px;color:var(--soft-n);margin-top:8px}
+.caption{margin-top:26px;min-height:5.2em;font-size:19px;line-height:1.45;max-width:30ch;transition:opacity 220ms var(--ease-out),filter 220ms var(--ease-out)}
+.caption.swap{opacity:.2;filter:blur(3px)}
+.line{position:relative;margin-top:30px;height:44px}
+.line svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.line input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.line:has(input:focus-visible){outline:2px solid var(--sodium);outline-offset:6px;border-radius:8px}
+@media (max-width:900px){
+  .journey{height:420vh}
+  .journey .stage{align-items:flex-start;padding-top:84px}
+  .journey .grid{grid-template-columns:1fr;gap:18px}
+  .carriage{border-radius:28px;padding:12px}
+  .window{border-radius:20px;aspect-ratio:4/3}
+  .info h2{font-size:34px}
+  .jclock{font-size:64px;margin-top:10px}
+  .caption{font-size:16px;margin-top:12px;min-height:4.4em}
+  .line{margin-top:14px}
+  .window{aspect-ratio:16/11}
+}
+
+/* Cabins */
+.cabins{background:var(--night-2);padding:clamp(96px,12vw,170px) 0}
+.cab-head{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap;margin-bottom:44px}
+.cab-head h2{font-size:clamp(46px,6vw,92px);max-width:10ch}
+.seg{display:inline-flex;padding:5px;border-radius:14px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line-n);position:relative}
+.seg button{position:relative;z-index:1;white-space:nowrap;min-height:44px;padding:0 clamp(12px,2vw,20px);border:0;border-radius:10px;background:none;font-weight:600;cursor:pointer;transition:color 200ms var(--ease-ui)}
+.seg button[aria-selected="true"]{color:var(--sodium-ink)}
+.seg .pill{position:absolute;z-index:0;top:5px;bottom:5px;left:5px;border-radius:10px;background:var(--sodium);transition:transform 350ms var(--ease-out),width 350ms var(--ease-out)}
+.cab{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,80px);align-items:center}
+.cab .ph{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--e3)}
+.cab .ph .slot{position:absolute;inset:0;transition:opacity 400ms var(--ease-out),filter 400ms var(--ease-out),transform 600ms var(--ease-out)}
+.cab .ph .slot[hidden]{display:block;opacity:0;filter:blur(8px);transform:scale(1.03);pointer-events:none}
+.cab .body{transition:opacity 220ms var(--ease-out),filter 220ms var(--ease-out)}
+.cab .body.swap{opacity:0;filter:blur(4px)}
+.cab h3{font-size:clamp(44px,4.6vw,72px)}
+.cab .price{font-family:var(--mono);color:var(--sodium);margin-top:10px;font-size:16px}
+.cab p.d{margin-top:20px;color:var(--soft-n);font-size:18px;max-width:40ch}
+.specs{margin:30px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:18px 28px;max-width:460px}
+.specs li{font-size:15px;color:var(--soft-n);padding-top:12px;box-shadow:0 -1px 0 var(--line-n)}
+.specs b{display:block;color:var(--ink-n);font-weight:600;font-size:16px}
+.cab .btn{margin-top:34px}
+@media (max-width:860px){.cab{grid-template-columns:1fr}.cab .ph{aspect-ratio:4/4}}
+
+/* Dining */
+.dining{padding:clamp(96px,12vw,170px) 0}
+.dining .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,80px);align-items:center}
+.dining .slot{aspect-ratio:4/5;border-radius:28px}
+.menu{position:relative;padding:clamp(28px,4vw,52px);border-radius:28px;background:#F1EDE3;color:#1E1A2E;box-shadow:var(--e3);transform:rotate(-1.2deg)}
+.menu h2{font-size:clamp(40px,4.6vw,68px);color:#1E1A2E}
+.menu .when{font-family:var(--mono);font-size:14px;color:#8A5A12;margin-top:8px}
+.menu dl{margin:28px 0 0}
+.menu .dish{display:grid;grid-template-columns:1fr auto;gap:2px 20px;padding:14px 0;box-shadow:0 1px 0 rgba(30,26,46,.12)}
+.menu dt{font-weight:600}
+.menu dd{margin:0;grid-column:1;color:#5A5468;font-size:15px}
+.menu .pr{grid-row:1;grid-column:2;font-family:var(--mono);font-size:15px}
+.menu .foot{margin-top:18px;font-size:14px;color:#5A5468}
+@media (max-width:860px){.dining .wrap{grid-template-columns:1fr}.menu{transform:none}}
+
+/* Dawn */
+.dawn{background:var(--day);color:var(--ink-d);padding:clamp(96px,12vw,170px) 0 0}
+.dawn h2{font-size:clamp(56px,9vw,150px);max-width:11ch}
+.dawn .sub{color:var(--soft-d);font-size:19px;max-width:46ch;margin-top:26px}
+.reveal{margin-top:clamp(48px,6vw,90px);clip-path:inset(12% 8% 12% 8% round 28px);transition:clip-path 1400ms var(--ease-io)}
+.reveal.in{clip-path:inset(0 0 0 0 round 0px)}
+.reveal .slot{aspect-ratio:21/9;background:#C9D4DE}
+.reveal .slot:not(.filled)::after{background:rgba(255,255,255,.8);color:var(--ink-d)}
+.arrive{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:clamp(56px,7vw,96px) 0 clamp(96px,12vw,160px)}
+.arrive div{padding-top:16px;box-shadow:0 -1.5px 0 var(--ink-d)}
+.arrive h3{font-size:32px}
+.arrive p{color:var(--soft-d);margin-top:10px;font-size:16px;max-width:34ch}
+@media (max-width:760px){.arrive{grid-template-columns:1fr}}
+
+/* Book */
+.book{background:var(--day-2);color:var(--ink-d);padding:clamp(96px,12vw,160px) 0}
+.book .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,96px);align-items:start}
+.book h2{font-size:clamp(52px,7vw,112px);max-width:8ch}
+.book .count{margin-top:26px;font-size:18px;color:var(--soft-d);max-width:30ch}
+.book .count b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(44px,5vw,72px);line-height:1;color:var(--ink-d);margin-top:6px;letter-spacing:.01em}
+form.bk{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:clamp(22px,3vw,36px);border-radius:28px;background:var(--day);box-shadow:inset 0 0 0 1px var(--line-d)}
+form.bk .full{grid-column:1/-1}
+form.bk label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+form.bk select,form.bk input{width:100%;min-height:50px;padding:0 14px;border-radius:12px;border:0;background:var(--day-2);color:var(--ink-d);box-shadow:inset 0 0 0 1px var(--line-d);transition:box-shadow 150ms var(--ease-ui)}
+form.bk select:focus,form.bk input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--ink-d)}
+form.bk [aria-invalid="true"]{box-shadow:inset 0 0 0 2px #C4432B}
+.total{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:18px;box-shadow:0 -1px 0 var(--line-d)}
+.total .amt{font-family:var(--display);font-weight:800;font-size:44px;line-height:1}
+.total small{display:block;font-size:14px;color:var(--soft-d)}
+.bmsg{grid-column:1/-1;min-height:22px;font-size:15px;color:var(--soft-d)}
+.bmsg.err{color:#B53D27}
+.ticket{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:6px 20px;padding:20px;border-radius:16px;background:var(--ink-d);color:var(--day-2)}
+.ticket .ref{font-family:var(--mono);font-size:22px;color:var(--sodium)}
+@starting-style{.ticket{opacity:0;transform:translateY(10px)}}
+.ticket{transition:opacity 400ms var(--ease-out),transform 400ms var(--ease-out)}
+@media (max-width:860px){.book .wrap{grid-template-columns:1fr}form.bk{grid-template-columns:1fr}}
+footer{background:var(--day-2);color:var(--soft-d);font-size:14px;padding:0 0 40px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;box-shadow:0 -1px 0 var(--line-d)}
+
+@media (prefers-reduced-motion: reduce){
+  .enter{animation:none}
+  .mask-line>span,.intro .copy{transform:none;opacity:1}
+  .journey{height:auto}
+  .journey .stage{position:relative;height:auto;min-height:100vh;padding:100px 0}
+  .reveal{clip-path:none}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="genbar" role="note" aria-label="How this site was made"><div class="wrap"><span>Website 2 of 5</span><span>Model <b id="g-model"></b></span><span>Est. API cost <b id="g-cost"></b></span><span>Generation time <b id="g-time"></b></span></div></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Nightjar Sleeper Co., back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M22 5a11 11 0 1 0 5 16A9 9 0 0 1 22 5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 21l7-3 4 2 8-4" fill="none" stroke="#F4A93B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Nightjar
+    </a>
+    <div class="links">
+      <a href="#night" data-sec="night">The night</a>
+      <a href="#cabins" data-sec="cabins">Cabins</a>
+      <a href="#dining" data-sec="dining">Dining car</a>
+      <a href="#arrive" data-sec="arrive">Arriving</a>
+      <a class="btn" href="#book">Book a trip</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<header class="hero" id="top">
+  <div class="photo">
+    <figure class="slot" id="heroSlot" data-slot="hero" data-label="Image 1: sleeper train at a night platform" style="margin:0"></figure>
+    <div class="shade"></div><div class="col"></div><canvas class="rain" id="rain" aria-hidden="true"></canvas>
+    <div class="lede"><div class="wrap">
+      <h1 class="enter" style="--i:0"><span style="display:block">Fall asleep in Paris.</span><span style="display:block">Wake up in Berlin.</span></h1>
+      <p class="sub enter" style="--i:1">Four night trains across Europe. Board after dinner, sleep in a real bed, and step off at breakfast in the middle of another&nbsp;city.</p>
+      <div class="ctas enter" style="--i:2"><a class="btn" href="#book">Book a trip</a><a class="btn ghost" href="#night">Watch the night pass</a></div>
+    </div></div>
+  </div>
+  <div class="wrap">
+    <section class="board enter" style="--i:3" aria-labelledby="dep-h">
+      <div class="board-in">
+        <div class="board-top"><h2 id="dep-h">Tonight’s departures</h2><span class="clk num" id="boardClock">--:--</span></div>
+        <table class="dep" aria-describedby="boardNote">
+          <thead><tr><th scope="col">Departs</th><th scope="col">Train</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Arrives</th><th scope="col">Status</th><th scope="col"><span class="vh">Show this route</span></th></tr></thead>
+          <tbody id="depBody"></tbody>
+        </table>
+        <p class="board-note" id="boardNote">Times are local to each departure station. Choose a train to see its night in the window below.</p>
+      </div>
+    </section>
+  </div>
+</header>
+
+<section class="intro" id="intro" aria-labelledby="in-h">
+  <div class="wrap">
+    <h2 id="in-h"><span class="mask-line"><span>The hotel room</span></span><span class="mask-line"><span>is the one</span></span><span class="mask-line"><span>that moves.</span></span></h2>
+    <div class="copy">
+      <p>Paris to Berlin by air takes most of a day once you count the airports. The Nightjar uses the night you were going to spend asleep&nbsp;anyway.</p>
+      <p>Proper mattresses and linen, a dining car that stays open until eleven, and a knock with coffee an hour before you arrive.</p>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="night" aria-labelledby="j-h">
+  <div class="stage" id="jStage">
+    <div class="wrap grid">
+      <div class="carriage"><div class="window"><canvas id="win" aria-hidden="true"></canvas><div class="glass"></div></div></div>
+      <div class="info">
+        <div class="route-name" id="jRoute">NJ 401</div>
+        <h2 id="j-h">The view from your berth.</h2>
+        <div class="jclock num" id="jClock">20:36</div>
+        <div class="jmeta" id="jMeta"></div>
+        <p class="caption" id="jCap" aria-live="polite"></p>
+        <div class="line">
+          <svg id="lineSvg" viewBox="0 0 1000 64" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <label for="jScrub" class="vh">Journey progress</label>
+          <input type="range" id="jScrub" min="0" max="200" value="0">
+        </div>
+        <div class="lnlab"><span id="lnA"></span><span id="lnB"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cabins" id="cabins" aria-labelledby="cab-h">
+  <div class="wrap">
+    <div class="cab-head">
+      <h2 id="cab-h">Three ways to spend the night.</h2>
+      <div class="seg" role="tablist" aria-label="Cabin type" id="seg"><span class="pill" id="segPill"></span></div>
+    </div>
+    <div class="cab" role="tabpanel" id="cabPanel" aria-live="polite">
+      <div class="ph" id="cabPh"></div>
+      <div class="body" id="cabBody"></div>
+    </div>
+  </div>
+</section>
+
+<section class="dining" id="dining" aria-labelledby="menu-h">
+  <div class="wrap">
+    <figure class="slot" data-slot="dining" data-label="Image 5: the dining car at night" style="margin:0"></figure>
+    <div class="menu">
+      <h2 id="menu-h">The dining car</h2>
+      <p class="when">Open from departure until 23:00</p>
+      <dl>
+        <div class="dish"><dt>Onion soup, gruyère toast</dt><dd>The one the kitchen is known for. Served until it runs out.</dd><dd class="pr num">€9</dd></div>
+        <div class="dish"><dt>Trout, brown butter, new potatoes</dt><dd>From a farm outside Karlsruhe, picked up on the way.</dd><dd class="pr num">€22</dd></div>
+        <div class="dish"><dt>Mushroom and barley stew</dt><dd>Vegan, with dark rye from the Berlin bakery we stop for in the morning.</dd><dd class="pr num">€17</dd></div>
+        <div class="dish"><dt>Plum tart and a small glass of Tokaji</dt><dd>Best eaten while the lights go past.</dd><dd class="pr num">€11</dd></div>
+      </dl>
+      <p class="foot">Dinner is included for suite guests. Anyone on board can walk through and take a&nbsp;table.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dawn" id="arrive" aria-labelledby="dawn-h">
+  <div class="wrap">
+    <h2 id="dawn-h">Wake up already there.</h2>
+    <p class="sub">An hour before arrival your attendant knocks with coffee and a warm roll. The blinds go up on a city that's only just starting.</p>
+  </div>
+  <figure class="reveal" id="reveal" style="margin-block:0"><div class="slot" data-slot="dawn" data-label="Image 6: dawn through the train window"></div></figure>
+  <div class="wrap arrive">
+    <div><h3>Centre to centre</h3><p>Every Nightjar arrives at a main station in the middle of the city. No transfer, no taxi queue.</p></div>
+    <div><h3>Showers on arrival</h3><p>Berth and cabin guests get a free shower and a locker at the arrival station until noon.</p></div>
+    <div><h3>Half the carbon</h3><p>A night train uses a fraction of the energy of the same trip by air. We publish the figures for every route each year.</p></div>
+  </div>
+</section>
+
+<section class="book" id="book" aria-labelledby="book-h">
+  <div class="wrap">
+    <div>
+      <h2 id="book-h">Book a trip.</h2>
+      <p class="count" id="countdown">The next Nightjar leaves in<b class="num">--</b></p>
+    </div>
+    <form class="bk" id="bk" novalidate>
+      <div class="full"><label for="bkRoute">Route</label><select id="bkRoute"></select></div>
+      <div><label for="bkDate">Date</label><input id="bkDate" type="date" required></div>
+      <div><label for="bkCab">Cabin</label><select id="bkCab"></select></div>
+      <div><label for="bkPax">Travellers</label><select id="bkPax"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+      <div><label for="bkEmail">Email for tickets</label><input id="bkEmail" type="email" autocomplete="email" inputmode="email" placeholder="name@example.com" required aria-describedby="emErr"><span class="field-err" id="emErr"></span></div>
+      <div class="total"><div><small id="totNote">2 travellers, private cabin</small><span class="amt num" id="tot">€0</span></div><button class="btn" type="submit">Hold tickets</button></div>
+      <p class="bmsg" id="bmsg" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"><span>Nightjar Sleeper Co. is a fictional company made for a design showcase. No trains run, sadly.</span><span>Timetables are illustrative.</span></div></footer>
+
+<script>
+const GEN={model:"Claude Opus 5",cost:"~$4.10",time:"~38 min"};
+const IMAGES={hero:"images/01-1fd88b79.webp",berth:"images/02-9148bae5.webp",cabin:"images/03-4a672aff.webp",suite:"images/04-76b588b5.webp",dining:"images/05-b71b540e.webp",dawn:"images/06-a2b76fd7.webp"};
+Object.keys(IMAGES).forEach(k=>{if(IMAGES[k].startsWith('{{'))IMAGES[k]=""});
+document.getElementById('g-model').textContent=GEN.model;document.getElementById('g-cost').textContent=GEN.cost;document.getElementById('g-time').textContent=GEN.time;
+
+const $=s=>document.querySelector(s),clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ALT={hero:"A dark blue sleeper train waiting at a platform under sodium lamps",berth:"Four-berth couchette made up with linen and reading lamps",cabin:"Private two-bed cabin with a folding table by the window",suite:"Suite with a double bed, armchair and private washroom",dining:"The dining car at night with lamps on every table",dawn:"Dawn light over fields seen through a train window"};
+function fill(){document.querySelectorAll('[data-slot]').forEach(el=>{const k=el.dataset.slot;if(IMAGES[k]&&!el.querySelector('img')){const i=new Image();i.src=IMAGES[k];i.alt=ALT[k]||"";if(k!=='hero')i.loading='lazy';el.appendChild(i);el.classList.add('filled')}})}
+
+/* ===== Routes (minutes after midnight; >1440 = next morning) ===== */
+const m=s=>{const[a,b]=s.split(':').map(Number);return a*60+b};
+const ROUTES=[
+ {id:"NJ 401",bird:"Nightjar",from:"Paris",to:"Berlin",stops:[["Paris Est","20:36"],["Strasbourg","22:31"],["Karlsruhe","23:14"],["Frankfurt Süd","00:22"],["Halle","05:48"],["Berlin Hbf","07:58"]],platform:"7"},
+ {id:"NJ 403",bird:"Heron",from:"Amsterdam",to:"Vienna",stops:[["Amsterdam C.","19:58"],["Utrecht","20:26"],["Cologne","22:48"],["Frankfurt","00:55"],["Nuremberg","03:30"],["Linz","07:12"],["Wien Hbf","09:14"]],platform:"15b"},
+ {id:"NJ 407",bird:"Tawny",from:"Brussels",to:"Prague",stops:[["Bruxelles Midi","19:23"],["Liège","20:30"],["Cologne","21:52"],["Leipzig","03:20"],["Dresden","05:04"],["Praha hl.n.","07:40"]],platform:"20"},
+ {id:"NJ 411",bird:"Swift",from:"Zurich",to:"Rome",stops:[["Zürich HB","20:40"],["Bellinzona","22:25"],["Milano C.","23:59"],["Bologna","02:10"],["Firenze SMN","03:40"],["Roma Termini","07:05"]],platform:"33"}
+];
+ROUTES.forEach(r=>{let prev=-1,add=0;r.t=r.stops.map(([,s])=>{let v=m(s)+add;if(v<prev){add+=1440;v+=1440}prev=v;return v});r.dep=r.t[0];r.arr=r.t[r.t.length-1]});
+const hhmm=v=>{v=((Math.round(v)%1440)+1440)%1440;return String(Math.floor(v/60)).padStart(2,'0')+':'+String(v%60).padStart(2,'0')};
+const nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes()+d.getSeconds()/60};
+
+/* ===== Split-flap board ===== */
+const CH="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:";
+function flapHTML(txt,cls=''){return `<span class="flap ${cls}" data-v="${txt}">${[...txt].map(c=>c===' '?'<i class="sp"> </i>':`<i>${reduce?c:CH[Math.floor(Math.random()*CH.length)]}</i>`).join('')}</span>`}
+function settle(root){
+  if(reduce)return;
+  root.querySelectorAll('.flap').forEach((f,fi)=>{
+    const target=[...f.dataset.v];
+    f.querySelectorAll('i').forEach((c,i)=>{
+      if(target[i]===' ')return;
+      let n=6+Math.floor(Math.random()*8)+fi%7;
+      const step=()=>{c.classList.remove('t');void c.offsetWidth;c.classList.add('t');
+        if(--n<=0){c.textContent=target[i];return}
+        c.textContent=CH[Math.floor(Math.random()*CH.length)];setTimeout(step,55+Math.random()*25)};
+      setTimeout(step,300+i*18+fi*12);
+    });
+  });
+}
+function statusFor(r){
+  const n=nowMin(),d=r.dep;
+  if(n>d+2&&n<1440) return ['DEPARTED',''];
+  if(n>=d-40&&n<=d+2) return ['BOARDING','amber'];
+  if(n>=d-120) return ['ON TIME',''];
+  return ['ON TIME',''];
+}
+let selected=0;
+function renderBoard(anim){
+  $('#depBody').innerHTML=ROUTES.map((r,i)=>{const[s,c]=statusFor(r);return `<tr class="row${i===selected?' sel':''}" data-i="${i}">
+    <td>${flapHTML(hhmm(r.dep),'amber')}</td><td>${flapHTML(r.id.replace(' ',''))}</td><td>${flapHTML(r.from.toUpperCase())}</td><td>${flapHTML(r.to.toUpperCase())}</td>
+    <td>${flapHTML(hhmm(r.arr))}</td><td>${flapHTML(s,c)}</td><td><button class="pick" data-pick="${i}" aria-pressed="${i===selected}">${i===selected?'Showing':'Show route'}</button></td></tr>`}).join('');
+  if(anim)settle($('#depBody'));
+}
+renderBoard(true);
+setInterval(()=>{$('#boardClock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})},1000);
+$('#depBody').addEventListener('click',e=>{const row=e.target.closest('tr.row');if(!row)return;selected=+row.dataset.i;renderBoard(false);setRoute(selected);
+  if(e.target.closest('[data-pick]'))document.getElementById('night').scrollIntoView({behavior:reduce?'auto':'smooth'})});
+
+/* ===== Journey: the window ===== */
+const cv=$('#win'),ctx=cv.getContext('2d');let W=0,H=0,DPR=1;
+function sizeCanvas(){const r=cv.getBoundingClientRect();DPR=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);seedDrops()}
+function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646}}
+const R=rnd(7);
+let DROPS=[];function seedDrops(){DROPS=Array.from({length:70},()=>({x:Math.random()*(W||800),y:Math.random()*(H||500),v:.4+Math.random()*1.2,r:.8+Math.random()*1.6,a:.25+Math.random()*.45}))}
+const STARS=Array.from({length:140},()=>[R(),R()*.6,R()*1.2+.3,R()]);
+/* Terrain as sum of sines; seeded per layer */
+const hill=(x,a,f,s)=>Math.sin(x*f+s)*a+Math.sin(x*f*2.3+s*1.7)*a*.45+Math.sin(x*f*5.1+s*.3)*a*.18;
+function lerpC(a,b,t){return a.map((v,i)=>Math.round(v+(b[i]-v)*t))}
+const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const rgb=c=>`rgb(${c[0]},${c[1]},${c[2]})`;
+/* sky palette by clock minute: [top,horizon] */
+const SKY=[[1110,'#3B3470','#E58C63'],[1230,'#241F5A','#7A4F86'],[1320,'#0E1238','#232A5E'],[1620,'#0B0E2E','#1A2050'],[1740,'#1B2358','#6A5C8E'],[1800,'#4A6FA5','#F2B48A'],[1890,'#8DB3D6','#F4D9B8']];
+function skyAt(min){ let v=min; if(v<1110)v+=1440; for(let i=0;i<SKY.length-1;i++){const[a,t1,h1]=SKY[i],[b,t2,h2]=SKY[i+1];if(v>=a&&v<=b){const t=(v-a)/(b-a);return[lerpC(hex(t1),hex(t2),t),lerpC(hex(h1),hex(h2),t),v]}}
+  const L=SKY[SKY.length-1];return[hex(L[1]),hex(L[2]),v]}
+let jr=ROUTES[0],jp=0,jpShown=0,travel=0,idle=0,winVisible=false,lastCap='';
+function darkness(v){ /* 0 day .. 1 full night */ if(v<1110)v+=1440; if(v<1260)return clamp((v-1110)/150); if(v<1680)return 1; return clamp(1-(v-1680)/170)}
+function draw(){
+  const t=jr.dep+(jr.arr-jr.dep)*jpShown;
+  const [top,hor]=skyAt(t);const dk=darkness(t);
+  const g=ctx.createLinearGradient(0,0,0,H*.72);g.addColorStop(0,rgb(top));g.addColorStop(1,rgb(hor));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  /* stars */
+  if(dk>.05){for(const[s,y,r,tw] of STARS){const x=((s*W*1.4-travel*.02)%(W*1.4)+W*1.4)%(W*1.4);ctx.globalAlpha=dk*(.35+.65*Math.abs(Math.sin(idle*.8+tw*9)));ctx.fillStyle='#F2F0FF';ctx.fillRect(x,y*H,r,r)}ctx.globalAlpha=1}
+  /* moon */
+  if(dk>.2){const mx=W*.78-travel*.01%W,my=H*.2;ctx.globalAlpha=dk;ctx.fillStyle='#F4EFD8';ctx.beginPath();ctx.arc(((mx%W)+W)%W,my,Math.max(10,W*.022),0,7);ctx.fill();ctx.globalAlpha=dk*.12;ctx.beginPath();ctx.arc(((mx%W)+W)%W,my,W*.06,0,7);ctx.fill();ctx.globalAlpha=1}
+  /* sun at dawn */
+  if(dk<.9&&t>1600){const a=1-dk;ctx.globalAlpha=a*.9;const sx=W*.3,sy=H*.62-a*H*.12;const sg=ctx.createRadialGradient(sx,sy,0,sx,sy,W*.25);sg.addColorStop(0,'rgba(255,214,160,.9)');sg.addColorStop(1,'rgba(255,214,160,0)');ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);ctx.globalAlpha=1}
+  const layer=(base,amp,freq,seed,speed,col,lights)=>{
+    const off=travel*speed;ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(0,H);
+    for(let x=0;x<=W+8;x+=8){ctx.lineTo(x,H*base-hill((x+off)/W,amp*H,3.1*freq,seed))}
+    ctx.lineTo(W,H);ctx.closePath();ctx.fill();
+    if(lights&&dk>.25){ /* town lights: clusters every ~1.7 widths */
+      const cell=W*.9;const first=Math.floor(off/cell);
+      for(let k=first-1;k<first+3;k++){const rr=rnd(k*97+seed*1000+11);if(rr()<.45)continue;const n=4+Math.floor(rr()*12);const cx=k*cell-off+rr()*cell;
+        for(let j=0;j<n;j++){const x=cx+(rr()-.5)*W*.14;const y=H*base-hill((x+off)/W,amp*H,3.1*freq,seed)+rr()*H*.05+2;ctx.globalAlpha=dk*(.6+.4*Math.sin(idle*3+j));ctx.fillStyle=j%3?'#F6C36B':'#FFE3A6';ctx.fillRect(x,y,2,2)}}
+      ctx.globalAlpha=1}
+  };
+  const mix=(a,b)=>rgb(lerpC(hex(a),hex(b),1-dk));
+  layer(.66,.07,1,1.3,.08,mix('#1A1C45','#7F8FB0'),false);
+  layer(.74,.06,1.7,4.1,.22,mix('#131537','#5E7394'),true);
+  layer(.86,.035,2.6,2.2,.55,mix('#0B0C25','#3F5A57'),true);
+  /* near: poles + wires */
+  let stn=0;jr.t.forEach(st=>{stn=Math.max(stn,clamp((1.9-Math.abs((t-st)/SIG))/.6))});
+  ctx.globalAlpha=1-stn;
+  const pOff=travel*1.6,gap=W*.42;ctx.strokeStyle=mix('#05061A','#1F2C2A');ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=Math.max(2,W*.006);
+  const first=Math.floor(pOff/gap);
+  ctx.beginPath();for(let k=first-1;k<first+4;k++){const x=k*gap-pOff;ctx.moveTo(x,H);ctx.lineTo(x,H*.3);ctx.moveTo(x-W*.02,H*.34);ctx.lineTo(x+W*.02,H*.34)}ctx.stroke();
+  ctx.lineWidth=1;ctx.beginPath();for(let k=first-1;k<first+4;k++){const x=k*gap-pOff;ctx.moveTo(x,H*.34);ctx.quadraticCurveTo(x+gap/2,H*.4,x+gap,H*.34)}ctx.stroke();
+  ctx.globalAlpha=1;
+  ctx.fillRect(0,H*.94,W,H*.06);
+  /* stations: the train really stops, and the platform slides in with its sign */
+  const K=W*38/(jr.arr-jr.dep);
+  jr.t.forEach((st,k)=>{
+    const u=(t-st)/SIG;if(Math.abs(u)>1.7)return;
+    const X=W*.5+(dist(st)-dist(t))*K*4,PW=W*2.4,L=X-PW/2;
+    ctx.save();ctx.globalAlpha=clamp((1.7-Math.abs(u))/.5);
+    ctx.beginPath();ctx.rect(Math.max(0,L),0,Math.min(W,L+PW)-Math.max(0,L),H);ctx.clip();
+    ctx.fillStyle=mix('#0C0E28','#5A5F6E');ctx.fillRect(L,0,PW,H*.13);
+    ctx.fillStyle=mix('#15183A','#7A8090');ctx.fillRect(L,H*.13,PW,H*.015);
+    ctx.fillStyle=mix('#1B1D33','#8C8F98');ctx.fillRect(L,H*.8,PW,H*.2);
+    ctx.fillStyle='rgba(244,169,59,.5)';ctx.fillRect(L,H*.8,PW,2);
+    for(let lx=L+W*.12;lx<L+PW;lx+=W*.38){
+      ctx.fillStyle=mix('#07081A','#3A3D48');ctx.fillRect(lx-2,H*.145,4,H*.66);
+      const gl=ctx.createRadialGradient(lx,H*.2,0,lx,H*.2,W*.16);gl.addColorStop(0,`rgba(255,196,110,${.55*dk+.15})`);gl.addColorStop(1,'rgba(255,196,110,0)');
+      ctx.fillStyle=gl;ctx.fillRect(lx-W*.16,0,W*.32,H*.8);
+      ctx.fillStyle='#FFD58F';ctx.fillRect(lx-7,H*.19,14,5);
+      const rf=ctx.createLinearGradient(0,H*.8,0,H);rf.addColorStop(0,`rgba(255,196,110,${.35*dk})`);rf.addColorStop(1,'rgba(255,196,110,0)');ctx.fillStyle=rf;ctx.fillRect(lx-W*.03,H*.8,W*.06,H*.2);
+    }
+    const name=jr.stops[k][0],fs=Math.max(12,W*.034);ctx.font=`600 ${fs}px "Instrument Sans", system-ui, sans-serif`;
+    const tw=ctx.measureText(name).width,sw=tw+fs*1.6,sh=fs*1.9,sx=X-sw/2,sy=H*.33;
+    ctx.fillStyle=mix('#05061A','#3A3D48');ctx.fillRect(X-sw*.35,H*.145,2,sy-H*.145);ctx.fillRect(X+sw*.35,H*.145,2,sy-H*.145);
+    ctx.fillStyle='#1B2A6B';ctx.beginPath();ctx.roundRect(sx,sy,sw,sh,6);ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(sx+4,sy+4,sw-8,sh-8,4);ctx.stroke();
+    ctx.fillStyle='#FFFFFF';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(name,X,sy+sh/2+1);
+    ctx.restore();
+  });
+  /* rain on the glass for the first part of the night */
+  const wet=clamp(1-(t-jr.dep-60)/100);
+  if(wet>0){
+    const sp=speedAt(t);
+    for(const d of DROPS){
+      if(!reduce){d.x-=d.v*(.4+sp*2.2);d.y+=d.v*(.6-sp*.3);if(d.x<-10||d.y>H+10){d.x=W+Math.random()*40;d.y=Math.random()*H*.9}}
+      ctx.globalAlpha=wet*d.a;ctx.strokeStyle='rgba(220,228,255,.9)';ctx.lineWidth=d.r;ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x+d.v*6*(.4+sp*2.2),d.y-d.v*3);ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+  }
+  /* reflection of cabin lamp at night */
+  if(dk>.3){ctx.globalAlpha=dk*.18;const lg=ctx.createRadialGradient(W*.16,H*.8,0,W*.16,H*.8,W*.28);lg.addColorStop(0,'#FFC878');lg.addColorStop(1,'rgba(255,200,120,0)');ctx.fillStyle=lg;ctx.fillRect(0,0,W,H);ctx.globalAlpha=1}
+  /* stage ground follows the sky */
+  const bg=lerpC(top,[18,22,58],.55);$('#jStage').style.setProperty('--jbg',rgb(bg));
+}
+const EVENTS=[
+ [0,r=>`Doors close at ${r.stops[0][0]}. Your attendant brings water, the key and tomorrow’s breakfast card.`],
+ [0.1,r=>`The dining car fills up. Onion soup until it runs out, service until 23:00.`],
+ [0.3,(r,si)=>`Past ${r.stops[si][0]}. The corridor lights dim and the blinds come down.`],
+ [0.45,r=>`Somewhere past midnight. Nearly everyone is asleep, and the train is at its quietest.`],
+ [0.72,(r,si,nx)=>`First grey light. ${nx[0]} is next, at ${nx[1]}, and nobody is on the platform yet.`],
+ [0.86,r=>`A knock on the door: coffee, a warm roll, and about an hour to go.`],
+ [0.985,r=>`Arriving ${r.stops[r.stops.length-1][0]}, ${hhmm(r.arr)}. Showers are on the platform level.`]
+];
+function lineSvg(){
+  const s=$('#lineSvg'),r=jr,span=r.arr-r.dep;
+  const x=v=>(v-r.dep)/span*1000;
+  s.innerHTML=`<line x1="0" x2="1000" y1="22" y2="22" stroke="rgba(236,234,246,.25)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+  <line id="lineDone" x1="0" x2="0" y1="22" y2="22" stroke="#F4A93B" stroke-width="3" vector-effect="non-scaling-stroke"/>`+
+  r.t.map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="15" y2="29" stroke="rgba(236,234,246,.75)" stroke-width="2" vector-effect="non-scaling-stroke"/>`).join('')+
+  `<line id="lineHead" x1="0" x2="0" y1="10" y2="34" stroke="#F4A93B" stroke-width="6" stroke-linecap="round" vector-effect="non-scaling-stroke"/>`;
+  $('#lnA').textContent=`${r.stops[0][0]} ${hhmm(r.dep)}`;$('#lnB').textContent=`${r.stops[r.stops.length-1][0]} ${hhmm(r.arr)}`;
+}
+function setRoute(i){jr=ROUTES[i];$('#jRoute').textContent=`${jr.id}, the ${jr.bird}. ${jr.from} to ${jr.to}`;lineSvg();lastCap='';updateInfo()}
+function updateInfo(){
+  const t=jr.dep+(jr.arr-jr.dep)*jp;
+  $('#jClock').textContent=hhmm(t);
+  let si=0;for(let i=0;i<jr.t.length;i++)if(jr.t[i]<=t+1)si=i;
+  const next=jr.stops[Math.min(si+1,jr.stops.length-1)];
+  let standing=null;jr.t.forEach((st,k)=>{if(Math.abs(t-st)<SIG*.35)standing=k});
+  $('#jMeta').innerHTML=jp>=.995?`<b>Arrived</b> at ${jr.stops[jr.stops.length-1][0]}`:standing!==null?`<b>Standing at ${jr.stops[standing][0]}</b>, departs ${jr.stops[standing][1]}`:`Next stop ${next[0]} at ${next[1]}`;
+  let ev=EVENTS[0];for(const e of EVENTS)if(jp>=e[0])ev=e;const txt=ev[1](jr,si,next);
+  if(txt!==lastCap){const c=$('#jCap');if(lastCap){c.classList.add('swap');setTimeout(()=>{c.textContent=txt;c.classList.remove('swap')},180)}else c.textContent=txt;lastCap=txt}
+  const X=jp*1000;const hd=$('#lineHead'),dn=$('#lineDone');if(hd){hd.setAttribute('x1',X);hd.setAttribute('x2',X);dn.setAttribute('x2',X)}
+}
+const SIG=9;
+function dist(t){let d=t;for(const s of jr.t){const u=clamp((t-s)/SIG,-1,1);d-=SIG/2*(u+Math.sin(Math.PI*u)/Math.PI)}return d}
+function speedAt(t){let v=1;for(const s of jr.t){const u=(t-s)/SIG;if(Math.abs(u)<1)v=Math.min(v,(1-Math.cos(Math.PI*u))/2)}return v}
+let idleOff=0;
+function loop(){
+  jpShown+=(jp-jpShown)*(reduce?1:.14);
+  const t=jr.dep+(jr.arr-jr.dep)*jpShown;
+  if(!reduce){idle+=.016;idleOff+=W*.0009*speedAt(t)}
+  const K=W*38/(jr.arr-jr.dep);
+  travel=dist(t)*K+idleOff;
+  draw();
+  if(winVisible&&!reduce)requestAnimationFrame(loop);
+}
+new IntersectionObserver(es=>es.forEach(e=>{const was=winVisible;winVisible=e.isIntersecting;if(winVisible&&!was){sizeCanvas();requestAnimationFrame(loop)}})).observe(cv);
+setRoute(0);sizeCanvas();draw();
+
+/* ===== Scroll ===== */
+const journey=$('#night'),nav=$('#nav'),heroSlot=$('#heroSlot');
+function prog(el){const r=el.getBoundingClientRect(),span=r.height-innerHeight;return span<=0?0:clamp(-r.top/span)}
+let q=false;
+function frame(){q=false;
+  if(!reduce){jp=prog(journey);$('#jScrub').value=Math.round(jp*200);updateInfo();
+    const hp=clamp(scrollY/(innerHeight*.9));heroSlot.style.transform=`translate3d(0,${hp*12}vh,0) scale(${1+hp*.06})`}
+  const dayTop=$('#arrive').getBoundingClientRect().top;
+  nav.classList.toggle('solid',scrollY>40);nav.classList.toggle('day',dayTop<68);
+  let cur=null;document.querySelectorAll('main > section[id]').forEach(s=>{const r=s.getBoundingClientRect();if(r.top<innerHeight*.4&&r.bottom>innerHeight*.4)cur=s.id});
+  document.querySelectorAll('.links a[data-sec]').forEach(a=>a.setAttribute('aria-current',a.dataset.sec===cur?'true':'false'));
+}
+addEventListener('scroll',()=>{if(!q){q=true;requestAnimationFrame(frame)}},{passive:true});
+addEventListener('resize',()=>{sizeCanvas();draw();movePill()});
+$('#jScrub').addEventListener('input',e=>{const p=e.target.value/200;
+  if(reduce){jp=p;updateInfo();jpShown=p;travel=p*W*38;draw();return}
+  const r=journey.getBoundingClientRect(),top=scrollY+r.top,span=r.height-innerHeight;scrollTo({top:top+p*span,behavior:'instant'})});
+if(reduce){updateInfo()}
+
+/* ===== Cabins ===== */
+const CABS=[
+ {id:"berth",name:"Berth",price:79,per:"per person",desc:"A made-up bed in a four-berth compartment, with a reading lamp, a curtain of your own and a locker for your bag. Shared washrooms at each end of the carriage.",specs:[["Sleeps","1 of 4, shared"],["Washroom","In the corridor"],["Breakfast","Coffee and a roll"],["Best for","Solo, and saving"]]},
+ {id:"cabin",name:"Private cabin",price:189,per:"for two",desc:"Two proper beds, one above the other, a window table and a washbasin. Locks from inside, and the attendant knocks at the time you choose.",specs:[["Sleeps","2, private"],["Washroom","Basin in cabin"],["Breakfast","Full tray to the door"],["Best for","Couples and friends"]]},
+ {id:"suite",name:"Suite",price:420,per:"for two",desc:"A double bed that faces the window, an armchair, and your own shower and toilet. Dinner in the dining car and a late checkout on the platform are included.",specs:[["Sleeps","2, double bed"],["Washroom","Private shower"],["Breakfast","Served in the suite"],["Includes","Dinner for two"]]}
+];
+let cabI=1;
+const seg=$('#seg');
+CABS.forEach((c,i)=>seg.insertAdjacentHTML('beforeend',`<button role="tab" id="tab-${c.id}" aria-controls="cabPanel" aria-selected="${i===cabI}" data-cab="${i}">${c.name}</button>`));
+$('#cabPh').innerHTML=CABS.map((c,i)=>`<figure class="slot" data-slot="${c.id}" data-label="Image ${i+2}: ${c.name.toLowerCase()} interior" style="margin:0" ${i===cabI?'':'hidden'}></figure>`).join('');
+function movePill(){const b=seg.querySelector(`[data-cab="${cabI}"]`),p=$('#segPill');p.style.width=b.offsetWidth+'px';p.style.transform=`translateX(${b.offsetLeft-5}px)`}
+function cabBody(c){return `<h3>${c.name}</h3><p class="price num">From €${c.price} ${c.per}</p><p class="d">${c.desc}</p>
+  <ul class="specs">${c.specs.map(([a,b])=>`<li>${a}<b>${b}</b></li>`).join('')}</ul><a class="btn" href="#book" data-bookcab="${c.id}">Book the ${c.name.toLowerCase()}</a>`}
+function setCab(i,anim){cabI=i;seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-selected',+b.dataset.cab===i));movePill();
+  $('#cabPh').querySelectorAll('.slot').forEach((s,k)=>s.hidden=k!==i);
+  const body=$('#cabBody');if(anim&&!reduce){body.classList.add('swap');setTimeout(()=>{body.innerHTML=cabBody(CABS[i]);body.classList.remove('swap')},200)}else body.innerHTML=cabBody(CABS[i]);
+  $('#cabPanel').setAttribute('aria-labelledby','tab-'+CABS[i].id)}
+seg.addEventListener('click',e=>{const b=e.target.closest('[data-cab]');if(b)setCab(+b.dataset.cab,true)});
+seg.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=(cabI+(e.key==='ArrowRight'?1:2))%3;setCab(n,true);seg.querySelector(`[data-cab="${n}"]`).focus()}});
+setCab(cabI,false);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-bookcab]');if(b){$('#bkCab').value=b.dataset.bookcab;price()}});
+
+/* ===== Reveal ===== */
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}}),{rootMargin:'-120px'}).observe($('#reveal'));
+
+/* ===== Booking ===== */
+$('#bkRoute').innerHTML=ROUTES.map((r,i)=>`<option value="${i}">${r.from} to ${r.to}, ${hhmm(r.dep)}–${hhmm(r.arr)} (${r.id})</option>`).join('');
+$('#bkCab').innerHTML=CABS.map(c=>`<option value="${c.id}">${c.name}, from €${c.price} ${c.per}</option>`).join('');$('#bkCab').value='cabin';
+const d0=new Date();$('#bkDate').value=d0.toISOString().slice(0,10);$('#bkDate').min=d0.toISOString().slice(0,10);
+function price(){
+  const pax=+$('#bkPax').value,c=CABS.find(x=>x.id===$('#bkCab').value);
+  let tot;if(c.id==='berth')tot=c.price*pax;else tot=c.price*Math.ceil(pax/2);
+  const units=c.id==='berth'?`${pax} berth${pax>1?'s':''}`:`${Math.ceil(pax/2)} ${c.name.toLowerCase()}${Math.ceil(pax/2)>1?'s':''}`;
+  $('#tot').textContent='€'+tot;$('#totNote').textContent=`${pax} traveller${pax>1?'s':''}, ${units}`;return tot}
+['bkPax','bkCab','bkRoute'].forEach(id=>$('#'+id).addEventListener('change',price));price();
+$('#bk').addEventListener('submit',e=>{e.preventDefault();const em=$('#bkEmail'),msg=$('#bmsg');
+  document.querySelector('.ticket')?.remove();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){em.setAttribute('aria-invalid','true');$('#emErr').textContent=em.value.trim()?'Check the address. It should look like name@example.com.':'Enter an email address to receive your tickets.';em.focus();return}
+  em.removeAttribute('aria-invalid');$('#emErr').textContent='';
+  const r=ROUTES[+$('#bkRoute').value],ref='NJ-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  const dt=new Date($('#bkDate').value+'T12:00').toLocaleDateString([], {weekday:'long',day:'numeric',month:'long'});
+  $('#bk').insertAdjacentHTML('beforeend',`<div class="ticket" role="status"><div><div class="ref">${ref}</div><div>${r.from} to ${r.to}, ${dt}. Boarding from ${hhmm(r.dep-40)} at platform ${r.platform}.</div></div><div class="num" style="align-self:center;font-weight:600">€${price()}</div><div style="grid-column:1/-1;font-size:14px;opacity:.75">Tickets held for 30 minutes. The payment link is on its way to ${em.value.trim()}.</div></div>`)});
+
+/* ===== Countdown ===== */
+function countdown(){const n=nowMin();let best=null;ROUTES.forEach(r=>{let d=r.dep-n;if(d<0)d+=1440;if(best===null||d<best.d)best={d,r}});
+  const h=Math.floor(best.d/60),mm=Math.floor(best.d%60);
+  $('#countdown').innerHTML=`The next Nightjar, ${best.r.from} to ${best.r.to}, leaves in<b class="num">${h?h+'&nbsp;h ':''}${mm}&nbsp;min</b>`}
+countdown();setInterval(countdown,20000);
+
+
+/* ===== Hero rain: two depths in front of the photo ===== */
+(function(){
+  const c=$('#rain'),x=c.getContext('2d');let w=0,h=0,drops=[],on=false,wind=0,windT=0;
+  function size(){const r=c.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);w=r.width;h=r.height;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0);
+    drops=Array.from({length:Math.round(w/5)},(_,i)=>{const near=i%5===0;return{x:Math.random()*w,y:Math.random()*h,l:near?26+Math.random()*20:10+Math.random()*10,v:near?16+Math.random()*6:7+Math.random()*4,a:near?.22:.12,wd:near?1.4:.8}})}
+  function tick(){
+    wind+=(windT-wind)*.05;
+    x.clearRect(0,0,w,h);x.lineCap='round';
+    const sc=scrollY*.35;
+    for(const d of drops){
+      d.y+=d.v;d.x+=wind*d.v*.25;
+      if(d.y>h+30){d.y=-30;d.x=Math.random()*w}
+      if(d.x>w+20)d.x=-20;if(d.x<-20)d.x=w+20;
+      const yy=(d.y-sc*(d.wd>1?1:.4)%h+h)%(h+60)-30;
+      x.strokeStyle=`rgba(210,220,255,${d.a})`;x.lineWidth=d.wd;x.beginPath();x.moveTo(d.x,yy);x.lineTo(d.x+wind*d.l*.3,yy+d.l);x.stroke();
+    }
+    if(on)requestAnimationFrame(tick);
+  }
+  if(reduce)return;
+  size();addEventListener('resize',size);
+  new IntersectionObserver(es=>es.forEach(e=>{const was=on;on=e.isIntersecting;if(on&&!was)requestAnimationFrame(tick)})).observe(c);
+  if(matchMedia('(pointer:fine)').matches)addEventListener('pointermove',e=>{windT=(e.clientX/innerWidth-.5)*.9},{passive:true});
+})();
+
+/* ===== Intro lines assemble once ===== */
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}}),{rootMargin:'0px 0px -20% 0px'}).observe($('#intro'));
+
+/* ===== Menu card responds to the pointer ===== */
+(function(){
+  const card=$('.menu');if(reduce||!matchMedia('(pointer:fine)').matches||innerWidth<860)return;
+  let rx=0,ry=0,tx=0,ty=0,raf=null;
+  const run=()=>{rx+=(tx-rx)*.12;ry+=(ty-ry)*.12;card.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) rotate(-1.2deg)`;
+    if(Math.abs(tx-rx)>.01||Math.abs(ty-ry)>.01)raf=requestAnimationFrame(run);else raf=null};
+  card.addEventListener('pointerenter',()=>card.classList.add('live'));
+  card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();ty=((e.clientX-r.left)/r.width-.5)*7;tx=-((e.clientY-r.top)/r.height-.5)*6;if(!raf)raf=requestAnimationFrame(run)});
+  card.addEventListener('pointerleave',()=>{card.classList.remove('live');tx=0;ty=0;cancelAnimationFrame(raf);raf=null;card.style.transform=''});
+})();
+fill();frame();
+</script>
+</body>
+</html>

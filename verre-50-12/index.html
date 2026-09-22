@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verre 50/1.2 | Ten pieces of glass, one point of focus</title>
+<meta name="description" content="The Verre 50/1.2 is a fast standard prime for full-frame mirrorless cameras, ground and assembled by hand in Annecy.">
+<meta name="theme-color" content="#C9CDCF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#CDD1D3; --canvas-2:#DDE0E1; --surface:#E9EBEC; --ink:#15181B; --soft:#4C5358; --line:rgba(21,24,27,.14);
+  --accent:#2F6B5E; --accent-ink:#FFFFFF; --coat:#7B4A8C;
+  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --text:"Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1); --ease-ui:cubic-bezier(.2,0,0,1);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --canvas:#1B1E21; --canvas-2:#23272A; --surface:#2A2E32; --ink:#E7EAEC; --soft:#A2AAB0; --line:rgba(231,234,236,.14); --accent:#5FB3A0; --accent-ink:#0E1512; }
+}
+:root[data-theme="dark"]{ --canvas:#1B1E21; --canvas-2:#23272A; --surface:#2A2E32; --ink:#E7EAEC; --soft:#A2AAB0; --line:rgba(231,234,236,.14); --accent:#5FB3A0; --accent-ink:#0E1512; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+::selection{background:var(--accent);color:var(--accent-ink)}
+img{max-width:100%;display:block}
+a{color:inherit;text-underline-position:from-font;text-decoration-thickness:from-font;text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+.wrap{width:min(1280px,100% - clamp(40px,6vw,96px));margin-inline:auto}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num,.mono{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:14px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--canvas);padding:8px 12px;z-index:200;border-radius:8px}.skip:focus{left:8px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border:0;border-radius:999px;background:var(--ink);color:var(--canvas);font-weight:500;font-size:16px;text-decoration:none;cursor:pointer;white-space:nowrap;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(0,0,0,.2),0 8px 20px -10px rgba(0,0,0,.45);
+  transition-property:transform,background-color;transition-duration:160ms;transition-timing-function:var(--ease-out)}
+.btn:active{transform:scale(.96)}
+.btn.quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.quiet:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+
+.genbar{background:#101315;color:#A7AFB4;font-size:13px;line-height:1.4}
+.genbar .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 26px;padding:9px 0}
+.genbar b{color:#EEF1F2;font-weight:600}
+.nav{position:sticky;top:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background-color 300ms var(--ease-out),box-shadow 300ms var(--ease-out)}
+.nav.solid{background:color-mix(in srgb,var(--canvas) 84%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:28px;letter-spacing:.01em}
+.mark svg{width:26px;height:26px}
+.links{display:flex;align-items:center;gap:4px}
+.links a:not(.btn){padding:10px 12px;border-radius:999px;text-decoration:none;font-size:15px;font-weight:500;transition:background-color 150ms var(--ease-ui)}
+.links a:not(.btn):hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.links a[aria-current="true"]{box-shadow:inset 0 -1.5px 0 var(--ink);border-radius:0}
+.links .btn{min-height:42px;padding:0 18px;margin-left:8px;font-size:15px}
+@media (max-width:860px){.links a:not(.btn){display:none}}
+
+/* ===== Pinned 3D sequence ===== */
+.seq{position:relative;height:640vh;margin-top:-64px}
+.seq .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(120% 90% at 62% 42%,var(--canvas-2) 0%,var(--canvas) 60%,color-mix(in srgb,var(--canvas) 80%,#000) 130%)}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.heroCopy{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;align-items:center;pointer-events:none}
+.heroCopy .inner{max-width:560px;pointer-events:auto}
+.heroCopy .kick{font-family:var(--mono);font-size:14px;color:var(--soft)}
+.heroCopy h1{font-size:clamp(56px,6.6vw,108px);line-height:.95;margin-top:18px}
+.heroCopy .sub{margin-top:22px;font-size:19px;color:var(--soft);max-width:38ch}
+.heroCopy .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.enter{animation:rise 1000ms var(--ease-out) both;animation-delay:calc(var(--i,0)*100ms + 150ms)}
+@keyframes rise{from{opacity:0;transform:translateY(18px);filter:blur(6px)}}
+.caps{position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);pointer-events:none}
+.cap{max-width:460px;opacity:0;transform:translateY(10px);transition:opacity 500ms var(--ease-out),transform 500ms var(--ease-out)}
+.cap.on{opacity:1;transform:none}
+.cap h2{font-size:clamp(34px,3.6vw,56px)}
+.cap p{margin-top:12px;color:var(--soft);font-size:17px;max-width:40ch}
+.capset{position:relative;min-height:190px}
+.capset .cap{position:absolute;left:0;bottom:0}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lab{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;transition:opacity 400ms var(--ease-out);white-space:nowrap}
+.lab.on{opacity:1}
+.lab .t{font-size:13px;font-weight:500;line-height:1.3;text-align:center;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 1px 2px rgba(0,0,0,.08),0 8px 18px -10px rgba(0,0,0,.3)}
+.lab .t small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--soft);font-weight:400}
+.lab i{width:1px;height:28px;background:var(--ink);opacity:.5}
+.lab.below{flex-direction:column-reverse}
+.meter{position:absolute;right:clamp(20px,4vw,56px);bottom:clamp(28px,6vh,64px);display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.meter span{display:flex;align-items:center;gap:10px;justify-content:flex-end;font-size:12px;color:var(--soft);opacity:.55;transition:opacity 300ms var(--ease-out),color 300ms var(--ease-out)}
+.meter span i{width:18px;height:1.5px;background:currentColor;transition:width 300ms var(--ease-out)}
+.meter span.on{opacity:1;color:var(--ink)}
+.meter span.on i{width:32px}
+.fallback{position:absolute;inset:0;display:none;place-items:center}
+.nogl .fallback{display:grid}
+@media (max-width:760px){
+  .seq{height:520vh}
+  .heroCopy{align-items:flex-start;padding-top:96px}
+  .heroCopy h1{font-size:44px}
+  .heroCopy .sub{font-size:16px}
+  .cap h2{font-size:30px}.cap p{font-size:15px}
+  .capset{min-height:150px}
+  .meter{display:none}
+  .lab .t{font-size:12px;padding:5px 8px}.lab .t small{display:none}.lab i{height:16px}
+}
+
+/* ===== Aperture ===== */
+.ap{padding:clamp(100px,12vw,170px) 0;background:var(--surface)}
+.ap .head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:52px}
+.ap h2{font-size:clamp(46px,5.6vw,88px)}
+.ap .head p{color:var(--soft);font-size:18px;max-width:44ch}
+.apgrid{display:grid;grid-template-columns:minmax(260px,.7fr) 1.3fr;gap:clamp(24px,5vw,72px);align-items:center}
+.iris{width:100%;max-width:380px;justify-self:center}
+.iris svg{width:100%;height:auto;display:block}
+.fnum{text-align:center;margin-top:18px;font-family:var(--display);font-size:64px;line-height:1}
+.fnum small{display:block;font-family:var(--text);font-size:15px;color:var(--soft);margin-top:8px}
+.stops{margin-top:26px}
+.stops input{width:100%;accent-color:var(--ink)}
+.stops .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--soft);margin-top:6px}
+.dof{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:3/2;background:#9aa2a6;box-shadow:0 30px 60px -30px rgba(0,0,0,.45);outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px}
+.dof .l{position:absolute;inset:0}
+.dof .l img{width:100%;height:100%;object-fit:cover}
+.dof .blur{-webkit-mask-image:radial-gradient(ellipse var(--mw,22%) var(--mh,30%) at 50% 27%,transparent 0 58%,#000 100%);mask-image:radial-gradient(ellipse var(--mw,22%) var(--mh,30%) at 50% 27%,transparent 0 58%,#000 100%)}
+.dof .blur img{filter:blur(var(--b,12px));transform:scale(1.04)}
+.dof figcaption{position:absolute;left:16px;bottom:14px;padding:6px 10px;border-radius:10px;background:rgba(15,18,20,.6);color:#F1F3F4;font-family:var(--mono);font-size:13px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.slot-empty{position:absolute;inset:0;display:grid;place-items:center;background:repeating-linear-gradient(135deg,transparent 0 16px,rgba(255,255,255,.12) 16px 17px),linear-gradient(160deg,#aab2b6,#6f787d)}
+.slot-empty span{padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.85);color:#15181B;font-size:13px;font-weight:600}
+.dofread{display:flex;gap:28px;flex-wrap:wrap;margin-top:18px;font-size:15px;color:var(--soft)}
+.dofread b{display:block;color:var(--ink);font-weight:600;font-size:18px}
+@media (max-width:860px){.ap .head,.apgrid{grid-template-columns:1fr}.iris{max-width:260px}}
+
+/* ===== Samples ===== */
+.samples{padding:clamp(100px,12vw,170px) 0}
+.samples h2{font-size:clamp(46px,5.6vw,88px);max-width:13ch}
+.gal{margin-top:56px;display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:auto auto;gap:clamp(16px,2.4vw,32px)}
+.shot{margin:0;position:relative}
+.shot .ph{position:relative;border-radius:20px;overflow:hidden;background:#9aa2a6;outline:1px solid oklch(0 0 0 / .1);outline-offset:-1px;clip-path:inset(8% 8% 8% 8% round 20px);transition:clip-path 1200ms var(--ease-io)}
+.shot.in .ph{clip-path:inset(0 0 0 0 round 20px)}
+.shot .ph img{width:100%;height:100%;object-fit:cover;scale:1.08;transition:scale 1400ms var(--ease-out)}
+.shot.in .ph img{scale:1}
+.shot figcaption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:15px}
+.shot figcaption .mono{color:var(--soft)}
+.s1{grid-row:span 2}.s1 .ph{aspect-ratio:4/5}.s2 .ph{aspect-ratio:3/2}.s3 .ph{aspect-ratio:1/1;width:72%}
+@media (max-width:860px){.gal{grid-template-columns:1fr}.s1{grid-row:auto}.s3 .ph{width:100%}}
+
+/* ===== Specs ===== */
+.specs{padding:clamp(90px,11vw,150px) 0;background:var(--surface)}
+.specs .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,80px)}
+.specs h2{font-size:clamp(46px,5.6vw,88px)}
+.specs .intro{margin-top:18px;color:var(--soft);max-width:34ch}
+dl.sheet{margin:0;display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
+dl.sheet div{display:flex;justify-content:space-between;gap:16px;padding:16px 0;box-shadow:0 -1px 0 var(--line)}
+dl.sheet dt{color:var(--soft);font-size:15px}
+dl.sheet dd{margin:0;font-family:var(--mono);font-size:15px;text-align:right}
+@media (max-width:860px){.specs .wrap{grid-template-columns:1fr}dl.sheet{grid-template-columns:1fr}}
+
+/* ===== Order / close ===== */
+.order{padding:clamp(110px,14vw,200px) 0 40px;background:#101315;color:#E9ECEE}
+.order .big{font-size:clamp(60px,9vw,160px);line-height:.92;max-width:10ch}
+.order .sub{margin-top:24px;max-width:46ch;color:#A7AFB4;font-size:18px}
+.oform{margin-top:56px;display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,5vw,72px);align-items:start}
+.mounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mounts button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:64px;padding:12px 16px;border:0;border-radius:16px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);color:#E9ECEE;text-align:left;cursor:pointer;
+  transition:transform 160ms var(--ease-out),box-shadow 150ms var(--ease-ui),background-color 150ms var(--ease-ui)}
+.mounts button:active{transform:scale(.97)}
+.mounts button small{font-size:13px;color:#8E979C}
+.mounts button[aria-checked="true"]{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 2px #E9ECEE}
+.oform label{display:block;font-weight:500;font-size:15px;margin-bottom:8px}
+.oform input{width:100%;min-height:52px;padding:0 18px;border-radius:14px;border:0;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);color:inherit;font-size:16px}
+.oform input:focus{outline:none;box-shadow:inset 0 0 0 2px #E9ECEE}
+.oform input[aria-invalid="true"]{box-shadow:inset 0 0 0 2px #F08B7A}
+.ferr{display:block;margin-top:6px;font-size:14px;color:#F4A193}.ferr:empty{display:none}
+.sum{padding:24px;border-radius:20px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.sum .row{display:flex;justify-content:space-between;padding:6px 0;color:#A7AFB4;font-size:15px}
+.sum .row b{color:#E9ECEE;font-weight:500}
+.sum .tot{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;margin-top:8px;box-shadow:0 -1px 0 rgba(255,255,255,.14)}
+.sum .tot span:last-child{font-family:var(--display);font-size:44px;line-height:1}
+.order .btn{background:#E9ECEE;color:#101315;width:100%;margin-top:18px}
+.ok{margin-top:14px;min-height:24px;font-size:15px}
+.foot{margin-top:clamp(90px,12vw,150px);padding-top:24px;box-shadow:0 -1px 0 rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px;color:#8E979C}
+@media (max-width:860px){.oform{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion: reduce){
+  .enter{animation:none}
+  .seq{height:auto}.seq .stage{position:relative;height:100vh}
+  .shot .ph{clip-path:none}.shot .ph img{scale:1}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="genbar" role="note" aria-label="How this site was made"><div class="wrap"><span>Website 4 of 5</span><span>Model <b id="g-model"></b></span><span>Est. API cost <b id="g-cost"></b></span><span>Generation time <b id="g-time"></b></span></div></div>
+<nav class="nav" id="nav" aria-label="Main"><div class="wrap">
+  <a class="mark" href="#top" aria-label="Verre, back to top"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 1.5v5M13 19.5v5" stroke="currentColor" stroke-width="1.5"/></svg>Verre</a>
+  <div class="links">
+    <a href="#top" data-sec="top">Inside</a><a href="#aperture" data-sec="aperture">Aperture</a><a href="#samples" data-sec="samples">Samples</a><a href="#specs" data-sec="specs">Specs</a>
+    <a class="btn" href="#order">Pre-order</a>
+  </div>
+</div></nav>
+
+<main id="main">
+<section class="seq" id="top" aria-label="The Verre 50/1.2, taken apart">
+  <div class="stage" id="stage">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="fallback" aria-hidden="true"><svg viewBox="0 0 600 240" width="min(80vw,720px)"><g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7"><rect x="40" y="40" width="520" height="160" rx="12"/><ellipse cx="480" cy="120" rx="22" ry="68"/><ellipse cx="420" cy="120" rx="14" ry="60"/><ellipse cx="360" cy="120" rx="18" ry="56"/><line x1="300" y1="70" x2="300" y2="170"/><ellipse cx="240" cy="120" rx="14" ry="50"/><ellipse cx="180" cy="120" rx="16" ry="52"/><ellipse cx="120" cy="120" rx="14" ry="48"/></g></svg></div>
+    <div class="labels" id="labels"></div>
+    <div class="heroCopy" id="heroCopy"><div class="wrap"><div class="inner">
+      <p class="kick enter" style="--i:0">Verre 50 mm f/1.2 for full-frame mirrorless</p>
+      <h1 class="enter" style="--i:1">Ten pieces of glass. One point of focus.</h1>
+      <p class="sub enter" style="--i:2">A fast standard prime, ground and assembled by hand in Annecy. Scroll to take it apart.</p>
+      <div class="ctas enter" style="--i:3"><a class="btn" href="#order">Pre-order the 50/1.2</a><a class="btn quiet" href="#aperture">Try the aperture</a></div>
+    </div></div></div>
+    <div class="caps"><div class="wrap"><div class="capset" id="capset">
+      <div class="cap" data-from=".14" data-to=".3"><h2>Built like an instrument.</h2><p>The barrel is milled from a single block of aluminium, anodised twice, and weighs 780&nbsp;g. The focus ring turns 270 degrees end to end.</p></div>
+      <div class="cap" data-from=".3" data-to=".46"><h2>Open it up.</h2><p>Inside, ten elements in seven groups. Each one is centred by hand to within two microns before the barrel is closed.</p></div>
+      <div class="cap" data-from=".46" data-to=".78"><h2>Every element has a job.</h2><p>Two aspherical elements keep f/1.2 sharp to the corners. One low dispersion element stops colour fringing on bright edges.</p></div>
+      <div class="cap" data-from=".78" data-to="1.01"><h2>All of it for one point.</h2><p>Light enters at 72&nbsp;mm across and leaves as a single point on the sensor, 18&nbsp;mm behind the mount.</p></div>
+    </div></div></div>
+    <div class="meter" id="meter" aria-hidden="true"><span><i></i>Assembled</span><span><i></i>Barrel</span><span><i></i>Opened</span><span><i></i>Elements</span><span><i></i>Light path</span></div>
+  </div>
+</section>
+
+<section class="ap" id="aperture" aria-labelledby="ap-h">
+  <div class="wrap">
+    <div class="head"><h2 id="ap-h">Thirteen blades, round at every stop.</h2><p>Most lenses turn out-of-focus highlights into polygons as you stop down. Thirteen curved blades keep them round from f/1.2 to f/4. Try it on a portrait made with the lens.</p></div>
+    <div class="apgrid">
+      <div>
+        <div class="iris"><svg id="iris" viewBox="-110 -110 220 220" role="img" aria-label="Aperture iris"></svg></div>
+        <div class="fnum num" id="fnum">f/1.2<small>Wide open</small></div>
+        <div class="stops"><label for="fstop" class="vh">Aperture</label><input type="range" id="fstop" min="0" max="8" step="1" value="0" aria-valuetext="f/1.2"><div class="ticks"><span>1.2</span><span>2</span><span>4</span><span>8</span><span>16</span></div></div>
+      </div>
+      <div>
+        <figure class="dof" id="dof" style="margin:0"></figure>
+        <div class="dofread"><span>In focus at 2&nbsp;m<b class="num" id="dofDepth">11.5 cm</b></span><span>Background blur<b id="dofBlur">Very soft</b></span><span>Shutter at the same light<b class="num" id="dofShutter">1/1600&nbsp;s</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="samples" id="samples" aria-labelledby="sm-h">
+  <div class="wrap">
+    <h2 id="sm-h">Made with the 50/1.2.</h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<section class="specs" id="specs" aria-labelledby="sp-h">
+  <div class="wrap">
+    <div><h2 id="sp-h">The numbers.</h2><p class="intro">Every lens ships with its own test chart, measured on our bench before it leaves Annecy.</p></div>
+    <dl class="sheet">
+      <div><dt>Focal length</dt><dd>50 mm</dd></div><div><dt>Maximum aperture</dt><dd>f/1.2</dd></div>
+      <div><dt>Minimum aperture</dt><dd>f/16</dd></div><div><dt>Construction</dt><dd>10 elements, 7 groups</dd></div>
+      <div><dt>Special elements</dt><dd>2 aspherical, 1 ED</dd></div><div><dt>Aperture blades</dt><dd>13, rounded</dd></div>
+      <div><dt>Closest focus</dt><dd>0.42 m</dd></div><div><dt>Maximum magnification</dt><dd>0.15×</dd></div>
+      <div><dt>Filter thread</dt><dd>72 mm</dd></div><div><dt>Size</dt><dd>Ø 82 × 96 mm</dd></div>
+      <div><dt>Weight</dt><dd>780 g</dd></div><div><dt>Mounts</dt><dd>E, Z, RF, L</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="order" id="order" aria-labelledby="or-h">
+  <div class="wrap">
+    <h2 class="big" id="or-h">Ships from <span id="shipMonth">November</span>.</h2>
+    <p class="sub">The first run is 600 lenses, assembled in the order they were reserved. A €100 deposit holds your place, and you pay the rest when yours is on the bench.</p>
+    <form class="oform" id="oform" novalidate>
+      <div>
+        <p id="mt-l" style="font-weight:500;font-size:15px;margin-bottom:10px">Camera mount</p>
+        <div class="mounts" role="radiogroup" aria-labelledby="mt-l" id="mounts"></div>
+        <div style="margin-top:22px"><label for="oEmail">Email</label><input id="oEmail" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" required aria-describedby="oErr"><span class="ferr" id="oErr"></span></div>
+      </div>
+      <div class="sum">
+        <div class="row"><span>Verre 50/1.2</span><b id="sumMount">Sony E</b></div>
+        <div class="row"><span>Your place in the run</span><b class="num" id="sumPlace">#412</b></div>
+        <div class="row"><span>Balance when it ships</span><b class="num">€1,790</b></div>
+        <div class="tot"><span>Deposit today</span><span class="num">€100</span></div>
+        <button class="btn" type="submit">Reserve with a €100 deposit</button>
+        <p class="ok" id="oOk" role="status"></p>
+      </div>
+    </form>
+    <div class="foot"><span>Verre is a fictional lens maker, made for a design showcase.</span><span>Annecy, Haute-Savoie</span></div>
+  </div>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const GEN={model:"Claude Opus 5",cost:"~$3.80",time:"~36 min"};
+const IMAGES={portrait:"images/01-7bb92b7e.webp",street:"images/02-263cada4.webp",land:"images/03-fc67094a.webp",still:"images/04-f654edf1.webp"};
+Object.keys(IMAGES).forEach(k=>{if(IMAGES[k].startsWith('{{'))IMAGES[k]=""});
+const $=s=>document.querySelector(s),clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),lerp=(a,b,t)=>a+(b-a)*t;
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, smooth=t=>t*t*(3-2*t);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(pointer:fine)').matches;
+$('#g-model').textContent=GEN.model;$('#g-cost').textContent=GEN.cost;$('#g-time').textContent=GEN.time;
+
+/* ================= 3D LENS ================= */
+const seq=$('#top'),stage=$('#stage'),canvas=$('#gl');
+let render3D=()=>{};
+(function(){
+  if(!window.THREE){document.body.classList.add('nogl');return}
+  const T=THREE;
+  let renderer;try{renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:true})}catch(e){document.body.classList.add('nogl');return}
+  renderer.outputEncoding=T.sRGBEncoding;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+  renderer.setClearColor(0x000000,0);
+  const scene=new T.Scene(),camera=new T.PerspectiveCamera(30,1,1,4000);
+
+  /* studio environment: softboxes, with a green and a magenta strip for coating reflections */
+  const env=new T.Scene();
+  env.add(new T.Mesh(new T.SphereGeometry(500,32,16),new T.MeshBasicMaterial({color:0x5c6266,side:T.BackSide})));
+  const box=(w,h,c,x,y,z,ry=0,rx=0)=>{const m=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:c,side:T.DoubleSide}));m.position.set(x,y,z);m.rotation.y=ry;m.rotation.x=rx;env.add(m)};
+  box(420,160,0xffffff,0,300,0,0,Math.PI/2);box(260,300,0xf2f4f6,-340,60,120,Math.PI/2);box(200,300,0xdfe6ea,360,40,-60,-Math.PI/2);
+  box(40,260,0x7cffb0,120,40,380,Math.PI);box(40,260,0xff6ad5,-160,20,380,Math.PI);box(300,60,0x9fb8ff,0,-160,300,Math.PI,.4);
+  const pm=new T.PMREMGenerator(renderer);scene.environment=pm.fromScene(env,.03).texture;
+  const key=new T.DirectionalLight(0xffffff,1.1);key.position.set(-200,300,260);scene.add(key);scene.add(new T.AmbientLight(0xffffff,.25));
+
+  /* materials */
+  const anod=new T.MeshStandardMaterial({color:0x1b1d20,metalness:.6,roughness:.36});
+  const anodIn=new T.MeshStandardMaterial({color:0x0c0d0f,metalness:.3,roughness:.8,side:T.DoubleSide});
+  const chrome=new T.MeshStandardMaterial({color:0xd9dcdf,metalness:1,roughness:.16});
+  const gold=new T.MeshStandardMaterial({color:0xd4a94a,metalness:1,roughness:.25});
+  const rim=new T.MeshStandardMaterial({color:0x33383c,metalness:.4,roughness:.5,side:T.DoubleSide});
+  const glassM=c=>new T.MeshPhysicalMaterial({color:c,metalness:0,roughness:.04,transparent:true,opacity:.52,clearcoat:1,clearcoatRoughness:.04,envMapIntensity:2.4,side:T.DoubleSide,depthWrite:false});
+  const glass=glassM(0xbfe4da),glassED=glassM(0xb4d0f5),glassAs=glassM(0xd6ecbd);
+  const canvasTex=(w,h,draw)=>{const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;t.anisotropy=8;return t};
+  const ribs=canvasTex(512,64,(g,w,h)=>{g.fillStyle='#808080';g.fillRect(0,0,w,h);for(let x=0;x<w;x+=8){g.fillStyle='#fff';g.fillRect(x,0,3,h);g.fillStyle='#000';g.fillRect(x+4,0,3,h)}});
+  ribs.wrapS=T.RepeatWrapping;ribs.repeat.set(10,1);ribs.encoding=T.LinearEncoding;
+  const grip=new T.MeshStandardMaterial({color:0x151719,metalness:.2,roughness:.7,bumpMap:ribs,bumpScale:.9});
+  const apTex=canvasTex(2048,128,(g,w,h)=>{g.fillStyle='#1b1d20';g.fillRect(0,0,w,h);g.fillStyle='#E8E8E8';g.font='600 44px Geist, system-ui, sans-serif';g.textAlign='center';g.textBaseline='middle';
+    ['1.2','1.4','2','2.8','4','5.6','8','11','16'].forEach((s,i)=>{g.fillText(s,120+i*120,h/2)});g.fillStyle='#E0B04A';g.fillRect(1240,h/2-5,40,10)});
+  const apMat=new T.MeshStandardMaterial({map:apTex,metalness:.5,roughness:.45,side:T.DoubleSide});
+  const bezTex=canvasTex(1024,1024,(g,w,h)=>{g.fillStyle='#16181a';g.fillRect(0,0,w,h);g.fillStyle='#EDEDED';g.font='500 38px Geist, system-ui, sans-serif';g.textAlign='center';g.textBaseline='middle';
+    const txt='VERRE  ·  50mm  1:1.2  ·  ANNECY  ·  Ø72  ·  ';const r=410;const n=txt.length;for(let i=0;i<n;i++){const a=-Math.PI/2+i/n*Math.PI*2;g.save();g.translate(w/2+Math.cos(a)*r,h/2+Math.sin(a)*r);g.rotate(a+Math.PI/2);g.fillText(txt[i],0,0);g.restore()}});
+  const bezMat=new T.MeshStandardMaterial({map:bezTex,metalness:.4,roughness:.5});
+
+  const V=(x,y)=>new T.Vector2(x,y);
+  const lens=new T.Group(),pivot=new T.Group();pivot.add(lens);scene.add(pivot);
+  const parts=[];/* {obj, y0, kind, dir} */
+  const add=(obj,y0,kind,extra={})=>{lens.add(obj);parts.push(Object.assign({obj,y0,kind},extra));return obj};
+
+  /* barrel halves */
+  const shell=(pts,mat,y0)=>{[0,1].forEach(h=>{const g=new T.LatheGeometry(pts,64,h*Math.PI,Math.PI);const m=new T.Mesh(g,mat);add(m,y0,'shell',{side:h?-1:1})})};
+  shell([V(35,-34),V(38,-34),V(38.6,-33),V(38.6,-12),V(38,-11),V(35,-11)],anod,0);
+  shell([V(35,-10),V(39.2,-10),V(39.2,-2),V(35,-2)].map(v=>v),anodIn,0);
+  [0,1].forEach(h=>{const g=new T.LatheGeometry([V(39.2,-10),V(39.2,-2)],64,h*Math.PI,Math.PI);const m=new T.Mesh(g,apMat);add(m,0,'shell',{side:h?-1:1})});
+  shell([V(35,0),V(40,0),V(41.2,1.5),V(41.2,29),V(40,30),V(35,30)],anodIn,0);
+  [0,1].forEach(h=>{const g=new T.LatheGeometry([V(41.3,1.5),V(41.3,29)],96,h*Math.PI,Math.PI);const m=new T.Mesh(g,grip);add(m,0,'shell',{side:h?-1:1})});
+  shell([V(35,31),V(40.2,31),V(40.6,32),V(40.6,44),V(40,45),V(37,45),V(37,43),V(35,43)],anod,0);
+  /* front bezel ring with engraving (moves forward) */
+  const bez=new T.Group();
+  const bring=new T.Mesh(new T.RingGeometry(36.2,40,96),bezMat);bring.rotation.x=-Math.PI/2;bring.position.y=.05;bez.add(bring);
+  const blip=new T.Mesh(new T.LatheGeometry([V(36.2,0),V(36.2,-3),V(40,-3),V(40,0)],96),anod);bez.add(blip);
+  bez.position.y=45;add(bez,45,'bezel');
+  /* mount */
+  const mount=new T.Group();
+  mount.add(new T.Mesh(new T.LatheGeometry([V(24,0),V(31,0),V(31,-2),V(34,-2),V(34,-6),V(24,-6)],96),chrome));
+  for(let i=0;i<3;i++){const tab=new T.Mesh(new T.BoxGeometry(14,2.2,5),chrome);const a=i*Math.PI*2/3;tab.position.set(Math.cos(a)*29,-7,Math.sin(a)*29);tab.rotation.y=-a;mount.add(tab)}
+  for(let i=0;i<10;i++){const c=new T.Mesh(new T.BoxGeometry(1.6,.6,2.6),gold);const a=-.5+i*.11;c.position.set(Math.cos(a)*26,-6.3,Math.sin(a)*26);c.rotation.y=-a;mount.add(c)}
+  mount.position.y=-34;add(mount,-34,'mount');
+
+  /* glass elements: [y, R, t, sagFront, sagRear, material, label, detail] */
+  const ELS=[
+   [37,34,6,5,-1.5,glass,'Front element','72 mm, high-index glass'],
+   [28,30,3,-1,4,glass,'Negative meniscus',null],
+   [20,27,7,3.5,3.5,glass,'Positive element',null],
+   [12,24,9,4,-3,glassED,'Cemented doublet','Corrects colour at f/1.2'],
+   [-5,22,6,3,2,glassAs,'Aspherical element','Sharp corners wide open'],
+   [-13,23,7,3.5,3.5,glassED,'ED element','Low dispersion glass'],
+   [-21,24,8,-2,4,glass,'Rear doublet',null],
+   [-29,21,5,2.5,1,glassAs,'Rear aspherical','Flattens the field']
+  ];
+  const elMeshes=[];
+  ELS.forEach(([y,R,t,sf,sr,mat,label,detail],i)=>{
+    const pts=[];const N=24;
+    for(let k=0;k<=N;k++){const r=R*k/N;pts.push(V(r,t/2+sf*(1-(r/R)**2)))}
+    for(let k=N;k>=0;k--){const r=R*k/N;pts.push(V(r,-t/2-sr*(1-(r/R)**2)))}
+    const g=new T.Group();
+    const body=new T.Mesh(new T.LatheGeometry(pts.map(p=>V(Math.max(.001,p.x),p.y)),72),mat);body.renderOrder=2;g.add(body);
+    const edge=new T.Mesh(new T.CylinderGeometry(R+.3,R+.3,t*.8,72,1,true),rim);g.add(edge);
+    g.position.y=y;add(g,y,'glass',{label,detail,R});elMeshes.push(g);
+  });
+  /* aperture iris */
+  const irisG=new T.Group();let irisMesh=null;
+  const irisMat=new T.MeshStandardMaterial({color:0x101113,metalness:.5,roughness:.5,side:T.DoubleSide});
+  function buildIris(open){if(irisMesh){irisG.remove(irisMesh);irisMesh.geometry.dispose()}
+    const s=new T.Shape();s.absarc(0,0,24,0,Math.PI*2,false);const hole=new T.Path();const n=13;
+    for(let i=0;i<=n;i++){const a=i/n*Math.PI*2,b=(i+.5)/n*Math.PI*2;const x=Math.cos(a)*open,z=Math.sin(a)*open;if(i===0)hole.moveTo(x,z);else hole.quadraticCurveTo(Math.cos(b-Math.PI/n)*open*1.06,Math.sin(b-Math.PI/n)*open*1.06,x,z)}
+    s.holes.push(hole);irisMesh=new T.Mesh(new T.ShapeGeometry(s,48),irisMat);irisMesh.rotation.x=-Math.PI/2;irisG.add(irisMesh)}
+  buildIris(19);
+  const irisRing=new T.Mesh(new T.LatheGeometry([V(23.5,1),V(27,1),V(27,-1),V(23.5,-1)],72),anod);irisG.add(irisRing);
+  irisG.position.y=3;add(irisG,3,'glass',{label:'Aperture',detail:'13 rounded blades',R:27});
+
+  /* sensor + rays */
+  const sensor=new T.Group();
+  const sb=new T.Mesh(new T.BoxGeometry(36,1.2,24),new T.MeshStandardMaterial({color:0x2a2240,metalness:.9,roughness:.2,envMapIntensity:2}));sensor.add(sb);
+  const sf=new T.Mesh(new T.BoxGeometry(46,2,34),new T.MeshStandardMaterial({color:0x2c7a55,metalness:.3,roughness:.6}));sf.position.y=-1.4;sensor.add(sf);
+  lens.add(sensor);
+  const rayMat=new T.MeshBasicMaterial({color:0xE8691E,transparent:true,opacity:0,depthWrite:false});
+  const RAYS=[-26,-17,-8,0,8,17,26];const rayMeshes=RAYS.map(()=>{const m=new T.Mesh(new T.BufferGeometry(),rayMat);m.renderOrder=3;lens.add(m);return m});let lastRay=-1,lastK=-1;
+  const focus=new T.Mesh(new T.SphereGeometry(1.6,16,12),new T.MeshBasicMaterial({color:0xFFB067,transparent:true,opacity:0}));lens.add(focus);
+
+  /* labels in HTML */
+  const labWrap=$('#labels');
+  const labs=parts.filter(p=>p.label).sort((a,b)=>b.y0-a.y0).map((p,i)=>{const d=document.createElement('div');d.className='lab'+(i%2?' below':'');d.innerHTML=`<span class="t">${p.label}${p.detail?`<small>${p.detail}</small>`:''}</span><i></i>`;labWrap.appendChild(d);return{p,d}});
+
+  /* orientations */
+  const qHero=new T.Quaternion().setFromEuler(new T.Euler(1.12,0,0)).premultiply(new T.Quaternion().setFromEuler(new T.Euler(0,.62,0)));
+  const qSide=new T.Quaternion().setFromEuler(new T.Euler(.1,0,-Math.PI/2)).premultiply(new T.Quaternion().setFromEuler(new T.Euler(.2,-.42,0)));
+  const qTall=new T.Quaternion().setFromEuler(new T.Euler(.22,.3,0));
+  let W=0,H=0,mobile=false;
+  function size(){const r=stage.getBoundingClientRect();W=r.width;H=r.height;mobile=W<760;renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));renderer.setSize(W,H,false);camera.aspect=W/H;camera.updateProjectionMatrix()}
+  size();addEventListener('resize',()=>{size();render3D(true)});
+  let px=0,py=0,tpx=0,tpy=0;
+  if(fine&&!reduce)addEventListener('pointermove',e=>{tpx=e.clientX/innerWidth-.5;tpy=e.clientY/innerHeight-.5;kick()},{passive:true});
+  const q=new T.Quaternion(),qp=new T.Quaternion(),v=new T.Vector3(),tmp=new T.Vector3();
+  let P=0,shownP=0,visible=true,running=false,t0=performance.now();
+
+  function pose(p){
+    const tRot=ease(clamp((p-.1)/.3)),tOpen=ease(clamp((p-.3)/.16)),tSpread=ease(clamp((p-.44)/.3)),tRay=clamp((p-.8)/.16),tHero=1-smooth(clamp(p/.14));
+    q.copy(qHero).slerp(mobile?qTall:qSide,tRot);
+    const idle=reduce?0:Math.sin((performance.now()-t0)/2400)*.06*(1-tRot*.7);
+    qp.setFromEuler(new T.Euler(py*.18+idle*.4,px*.35+idle,0));q.premultiply(qp);
+    pivot.quaternion.copy(q);
+    pivot.position.set(mobile?lerp(0,30,tHero):lerp(0,72,tHero),mobile?lerp(0,-78,tHero):lerp(0,-6,tHero),0);
+    const D=mobile?lerp(lerp(560,500,tHero),lerp(640,840,tSpread),tRot):lerp(lerp(340,330,tHero),lerp(420,500,tSpread),tRot);
+    const ly=mobile?lerp(-6,-58,tRot):0;camera.position.set(0,(mobile?10:18)+ly,D);camera.lookAt(0,ly,0);
+    const k=1+2.05*tSpread;
+    parts.forEach(pt=>{const o=pt.obj;
+      if(pt.kind==='shell'){o.position.x=pt.side*(mobile?150:50)*tOpen;o.position.y=0;}
+      else if(pt.kind==='bezel'){o.position.y=45*k+18*tOpen}
+      else if(pt.kind==='mount'){o.position.y=-34*k-12*tSpread}
+      else if(pt.kind==='glass'){o.position.y=pt.y0*k}});
+    parts.filter(p=>p.kind==='shell').forEach(p=>{p.obj.visible=tOpen<.999||true;p.obj.material.opacity=1});
+    buildIrisIf(p);
+    /* sensor + rays */
+    const mountY=-34*k-12*tSpread,sensY=mountY-26-18*tSpread;
+    sensor.position.y=sensY;sensor.visible=tSpread>.2;sensor.scale.setScalar(lerp(.6,1,smooth(clamp((tSpread-.2)/.5))));
+    rayMat.opacity=tRay>0?.9*smooth(clamp(tRay*3)):0;
+    const stops=[140+45*k,...ELS.map(e=>e[0]*k).filter((_,i)=>i<4),3*k,...ELS.map(e=>e[0]*k).filter((_,i)=>i>=4),mountY,sensY+1];
+    focus.position.y=sensY+1;focus.material.opacity=smooth(clamp((tRay-.7)/.3));focus.scale.setScalar(1+.35*Math.sin(performance.now()/300)*focus.material.opacity);
+    if(tRay>0&&(Math.abs(tRay-lastRay)>.008||Math.abs(k-lastK)>.01)){lastRay=tRay;lastK=k;const n=stops.length;
+      RAYS.forEach((h0,ri)=>{const pts=stops.map((y,i)=>{const f=i===0?1:i===n-1?0:(i<5?1-.05*i:1-.2-(i-4)/(n-5)*.8);const h=h0*f*(i>=n-2?(i===n-1?0:.28):1);return new T.Vector3(h,y,0)});
+        const L=Math.min(1,tRay*1.2)*(n-1),full=Math.floor(L),frac=L-full;const use=pts.slice(0,full+1);if(full<n-1)use.push(pts[full].clone().lerp(pts[full+1],frac));
+        const path=new T.CurvePath();for(let j=0;j<use.length-1;j++)path.add(new T.LineCurve3(use[j],use[j+1]));
+        const m=rayMeshes[ri];m.geometry.dispose();m.geometry=use.length>1?new T.TubeGeometry(path,Math.max(2,use.length*4),.42,6,false):new T.BufferGeometry()});}
+    rayMeshes.forEach(m=>m.visible=tRay>0);
+    /* labels */
+    const showLab=tSpread>.6&&p<.8;
+    labs.forEach(({p:pt,d},i)=>{pt.obj.getWorldPosition(v);
+      const off=(pt.R+8)*(i%2?-1:1);
+      tmp.set(mobile?off:0,0,mobile?0:0);
+      /* anchor above or below the element in screen space */
+      const w=v.clone();
+      if(!mobile){w.y+=(i%2?-1:1)*(pt.R+10)}else{w.x+=(i%2?-1:1)*(pt.R+10)}
+      w.project(camera);const sx=(w.x*.5+.5)*W,sy=(-w.y*.5+.5)*H;
+      if(mobile){const lw=d.offsetWidth||120;const lx=i%2?Math.max(6,sx-lw):Math.min(W-6-lw,sx);d.style.transform=`translate(${lx}px,${sy}px) translateY(-50%)`}
+      else d.style.transform=`translate(${sx}px,${sy}px) translate(-50%,${i%2?'0':'-100%'})`;
+      if(mobile){d.style.flexDirection=i%2?'row':'row-reverse';d.querySelector('i').style.cssText='width:12px;height:1px'}else{d.style.flexDirection='';d.querySelector('i').style.cssText=`height:${Math.floor(i/2)%2?78:22}px`}
+      d.classList.toggle('on',showLab)});
+    renderer.render(scene,camera);
+  }
+  let lastOpen=-1;
+  function buildIrisIf(p){const o=p<.46?19:p<.8?lerp(19,9,smooth(clamp((p-.5)/.25))):lerp(9,19,smooth(clamp((p-.8)/.15)));if(Math.abs(o-lastOpen)>.3){buildIris(o);lastOpen=o}}
+  function loop(){
+    px+=(tpx-px)*.06;py+=(tpy-py)*.06;shownP+=(P-shownP)*(reduce?1:.12);
+    pose(shownP);
+    const settling=Math.abs(P-shownP)>.0005||Math.abs(tpx-px)>.001||Math.abs(tpy-py)>.001;
+    if(visible&&!reduce&&(settling||shownP<.46)){requestAnimationFrame(loop)}else running=false;
+  }
+  function kick(){if(!running&&visible){running=true;requestAnimationFrame(loop)}}
+  render3D=force=>{P=reduce?.74:clamp(-seq.getBoundingClientRect().top/(seq.offsetHeight-innerHeight));if(force)pose(shownP=P);kick()};
+  new IntersectionObserver(es=>es.forEach(e=>{visible=e.isIntersecting;if(visible)kick()})).observe(stage);
+  if(reduce){shownP=P=.74;pose(P)}
+})();
+
+/* captions + meter */
+const caps=[...document.querySelectorAll('.cap')],meter=[...document.querySelectorAll('#meter span')],heroCopy=$('#heroCopy');
+function seqUI(){
+  const p=reduce?.74:clamp(-seq.getBoundingClientRect().top/(seq.offsetHeight-innerHeight));
+  const h=1-smooth(clamp(p/.1));heroCopy.style.opacity=h;heroCopy.style.transform=`translate3d(0,${(1-h)*-30}px,0)`;heroCopy.style.visibility=h<.02?'hidden':'visible';
+  caps.forEach(c=>c.classList.toggle('on',p>=+c.dataset.from&&p<+c.dataset.to));
+  const st=p<.12?0:p<.3?1:p<.46?2:p<.78?3:4;meter.forEach((m,i)=>m.classList.toggle('on',i===st));
+}
+
+/* ================= Aperture ================= */
+const STOPS=[1.2,1.4,2,2.8,4,5.6,8,11,16];
+const iris=$('#iris');
+function drawIris(f){
+  const open=92*1.2/f;const n=13;let d='M 0 -104 A 104 104 0 1 1 -0.01 -104 Z ';
+  const round=clamp((4-f)/2.8); /* blades curve more when wide */
+  for(let i=0;i<=n;i++){const a=i/n*Math.PI*2-Math.PI/2,x=Math.cos(a)*open,y=Math.sin(a)*open;
+    if(i===0)d+=`M ${x.toFixed(2)} ${y.toFixed(2)} `;else{const b=a-Math.PI/n,c=open*(1+.06*round+.012);d+=`Q ${(Math.cos(b)*c).toFixed(2)} ${(Math.sin(b)*c).toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)} `}}
+  let blades='';for(let i=0;i<n;i++){const a=i/n*Math.PI*2-Math.PI/2,x=Math.cos(a)*open,y=Math.sin(a)*open,a2=a+1.15;blades+=`<path d="M ${x.toFixed(2)} ${y.toFixed(2)} Q ${(Math.cos(a+.6)*((open+104)/2)).toFixed(2)} ${(Math.sin(a+.6)*((open+104)/2)).toFixed(2)} ${(Math.cos(a2)*104).toFixed(2)} ${(Math.sin(a2)*104).toFixed(2)}" fill="none" stroke="#3a3f43" stroke-width="1"/>`}
+  iris.innerHTML=`<defs><radialGradient id="ig" cx="50%" cy="40%"><stop offset="0" stop-color="#2a2e32"/><stop offset="1" stop-color="#0f1113"/></radialGradient><radialGradient id="light" cx="50%" cy="50%"><stop offset="0" stop-color="#fff6e3"/><stop offset=".7" stop-color="#ffd9a0"/><stop offset="1" stop-color="#e3a860"/></radialGradient></defs>
+  <circle r="104" fill="url(#light)"/><path d="${d}" fill="url(#ig)" fill-rule="evenodd"/>${blades}<circle r="104" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="3"/><circle r="109" fill="none" stroke="currentColor" stroke-opacity=".12" stroke-width="2"/>`;
+}
+const dof=$('#dof');
+dof.innerHTML=IMAGES.portrait?`<div class="l"><img src="${IMAGES.portrait}" alt="A portrait of a woman in a flower market, made with the Verre 50/1.2"></div><div class="l blur" aria-hidden="true"><img src="${IMAGES.portrait}" alt=""></div><figcaption class="num" id="dofCap"></figcaption>`:`<div class="slot-empty"><span>Image 1: portrait in a busy street</span></div><figcaption class="num" id="dofCap"></figcaption>`;
+function setStop(i){
+  const f=STOPS[i];drawIris(f);
+  $('#fnum').innerHTML=`f/${f}<small>${i===0?'Wide open':i>=7?'Stopped right down':i>=4?'Stopped down':'Nearly wide open'}</small>`;
+  $('#fstop').setAttribute('aria-valuetext','f/'+f);
+  const s=2000,c=.03,fl=50,depth=2*f*c*s*s/(fl*fl)/10; /* cm */
+  $('#dofDepth').textContent=depth<100?depth.toFixed(1)+' cm':(depth/100).toFixed(2)+' m';
+  const blur=Math.max(.4,16*Math.pow(1.2/f,1.1));
+  dof.style.setProperty('--b',blur.toFixed(1)+'px');dof.style.setProperty('--mw',(22+(f-1.2)*5)+'%');dof.style.setProperty('--mh',(30+(f-1.2)*5.5)+'%');
+  $('#dofBlur').textContent=f<=1.4?'Very soft':f<=2.8?'Soft':f<=5.6?'Gentle':'Mostly sharp';
+  const sh=Math.round(1600*Math.pow(1.2/f,2));const nice=[1600,1250,1000,800,640,500,400,320,250,200,160,125,100,80,60,50,40,30,25,20,15,13,10,8];
+  const pick=nice.reduce((a,b)=>Math.abs(b-sh)<Math.abs(a-sh)?b:a);
+  $('#dofShutter').innerHTML=`1/${pick}&nbsp;s`;
+  const cap=$('#dofCap');if(cap)cap.textContent=`50 mm  f/${f}  1/${pick}  ISO 100`;
+}
+$('#fstop').addEventListener('input',e=>setStop(+e.target.value));setStop(0);
+
+/* ================= Samples ================= */
+const SHOTS=[
+ {c:'s1',k:'street',t:'Rue Sainte-Claire after rain',x:'f/1.2  1/60  ISO 1600',l:'Image 2: night street, portrait format'},
+ {c:'s2',k:'land',t:'Lac d’Annecy at first light',x:'f/8  1/250  ISO 100',l:'Image 3: lake landscape at dawn'},
+ {c:'s3',k:'still',t:'Pears on the studio sill',x:'f/2  1/125  ISO 200',l:'Image 4: still life'}
+];
+$('#gal').innerHTML=SHOTS.map(s=>`<figure class="shot ${s.c}"><div class="ph">${IMAGES[s.k]?`<img src="${IMAGES[s.k]}" alt="${s.t}" loading="lazy">`:`<div class="slot-empty" style="position:relative;height:100%;min-height:200px"><span>${s.l}</span></div>`}</div><figcaption><span>${s.t}</span><span class="mono">${s.x}</span></figcaption></figure>`).join('');
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target)}}),{rootMargin:'0px 0px -12% 0px'}).observe($('.s1'));
+document.querySelectorAll('.shot').forEach(s=>new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.disconnect()}}),{rootMargin:'0px 0px -12% 0px'}).observe(s));
+
+/* ================= Order ================= */
+const MOUNTS=[["Sony E","Alpha 7 and 9 series"],["Nikon Z","Z5 to Z9"],["Canon RF","EOS R series"],["L-Mount","Leica, Panasonic, Sigma"]];
+let mi=0;
+$('#mounts').innerHTML=MOUNTS.map(([n,d],i)=>`<button type="button" role="radio" aria-checked="${i===mi}" tabindex="${i===mi?0:-1}" data-m="${i}">${n}<small>${d}</small></button>`).join('');
+function setMount(i){mi=i;$('#mounts').querySelectorAll('button').forEach((b,k)=>{b.setAttribute('aria-checked',k===i);b.tabIndex=k===i?0:-1});$('#sumMount').textContent=MOUNTS[i][0]}
+$('#mounts').addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(b)setMount(+b.dataset.m)});
+$('#mounts').addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','ArrowDown','ArrowUp'].includes(e.key))return;e.preventDefault();const n=(mi+(e.key==='ArrowRight'||e.key==='ArrowDown'?1:3))%4;setMount(n);$(`[data-m="${n}"]`).focus()});
+const place=412+Math.floor((Date.now()/864e5)%40);$('#sumPlace').textContent='#'+place;
+const ship=new Date();ship.setMonth(ship.getMonth()+2);$('#shipMonth').textContent=ship.toLocaleDateString('en-GB',{month:'long'});
+$('#oform').addEventListener('submit',e=>{e.preventDefault();const inp=$('#oEmail'),v=inp.value.trim(),err=$('#oErr');
+  if(!v||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){inp.setAttribute('aria-invalid','true');err.textContent=v?'Check the address. It should look like name@example.com.':'Enter an email address to receive your reservation.';inp.focus();return}
+  inp.removeAttribute('aria-invalid');err.textContent='';
+  $('#oOk').textContent=`Reserved. Lens #${place} for ${MOUNTS[mi][0]} is yours, and the deposit link is on its way to ${v}.`});
+
+/* ================= Scroll ================= */
+const nav=$('#nav');let qd=false;
+function frame(){qd=false;render3D();seqUI();
+  nav.classList.toggle('solid',seq.getBoundingClientRect().bottom<innerHeight*.5);
+  let cur=null;document.querySelectorAll('main > section[id]').forEach(s=>{const r=s.getBoundingClientRect();if(r.top<innerHeight*.4&&r.bottom>innerHeight*.4)cur=s.id});
+  document.querySelectorAll('.links a[data-sec]').forEach(a=>a.setAttribute('aria-current',a.dataset.sec===cur?'true':'false'))}
+addEventListener('scroll',()=>{if(!qd){qd=true;requestAnimationFrame(frame)}},{passive:true});
+frame();render3D(true);
+</script>
+</body>
+</html>
