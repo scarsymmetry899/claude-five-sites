@@ -2,13 +2,13 @@
 
 Five fictional brand websites, each designed and built end to end: brand, copy, layout, interaction and code. The last two model their products in 3D in the browser.
 
-| # | Site | Folder | What makes it different |
-|---|------|--------|--------------------------|
-| 01 | Morrow Salt Works | `morrow-salt-works/` | Layered photo hero, live tide clock, scroll floods and drains the salt pans |
-| 02 | Nightjar Sleeper Co. | `nightjar-sleeper/` | Split-flap departures board, canvas train window that stops at every station |
-| 03 | Overprint | `overprint/` | Whole site reprints in any two of twelve risograph inks, scroll-driven print run |
-| 04 | Verre 50/1.2 | `verre-50-12/` | 3D camera lens that separates into ten glass elements and traces light |
-| 05 | Fieldnote K65 | `fieldnote-k65/` | 3D keyboard you can type on, comes apart into seven layers |
+| # | Site | Live | Folder | What makes it different |
+|---|------|------|--------|--------------------------|
+| 01 | Morrow Salt Works | [Visit](https://morrow-salt-works.vercel.app) | `morrow-salt-works/` | Layered photo hero, live tide clock, scroll floods and drains the salt pans |
+| 02 | Nightjar Sleeper Co. | [Visit](https://nightjar-sleeper.vercel.app) | `nightjar-sleeper/` | Split-flap departures board, canvas train window that stops at every station |
+| 03 | Overprint | [Visit](https://overprint-studio.vercel.app) | `overprint/` | Whole site reprints in any two of twelve risograph inks, scroll-driven print run |
+| 04 | Verre 50/1.2 | [Visit](https://verre-50-12.vercel.app) | `verre-50-12/` | 3D camera lens that separates into ten glass elements and traces light |
+| 05 | Fieldnote K65 | [Visit](https://fieldnote-k65.vercel.app) | `fieldnote-k65/` | 3D keyboard you can type on, comes apart into seven layers |
 
 ## Running locally
 
@@ -32,6 +32,16 @@ Then open <http://localhost:8000>. Opening the HTML files directly with `file://
 ```
 
 Each site is a single HTML file with its CSS and JavaScript inline. The only external requests are Google Fonts and, for sites 04 and 05, three.js r128 from cdnjs.
+
+## Live sites
+
+Each folder is its own Vercel project, all deploying from this repo on every push to `main`:
+
+- https://morrow-salt-works.vercel.app
+- https://nightjar-sleeper.vercel.app
+- https://overprint-studio.vercel.app
+- https://verre-50-12.vercel.app
+- https://fieldnote-k65.vercel.app
 
 ## Deploying to Vercel
 
